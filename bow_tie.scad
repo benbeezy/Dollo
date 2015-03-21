@@ -1,5 +1,5 @@
 $fn = 100;
-length = 15;
+length = 12.5;
 include <include.scad>;
 include <globals.scad>;
 
@@ -21,7 +21,7 @@ module bow_holes() {
 	translate([-10,2.5,-2]) rotate([0,90,0]) #cylinder(h=50, d=1.5);
 }
 
-rotate([0,45*3,0]){
+rotate([0,45*0,0]){
 difference(){
 	scale([0.9,0.9,0.85]) rotate([0,180,0]) bow_tie_master();
 	bow_holes();

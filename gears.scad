@@ -82,9 +82,9 @@ module motor_mount(){
             }
 
     module gear_one(hole=5.5){
-        translate([0,0,thickness]) mirror([0,0,1]) gear(mm_per_tooth,12,thickness,hole,twist);
-        gear(mm_per_tooth,12,thickness,hole,twist);
-        translate([0,4.5,0]) cube([5,5,thickness], center=true);
+        translate([0,0,thickness]) mirror([0,0,1]) gear(mm_per_tooth,11,thickness,hole,twist);
+        gear(mm_per_tooth,11,thickness,hole,twist);
+        translate([0,4.5,thickness/2]) cube([5,5,thickness*2], center=true);
         }
             module gear_large() {
 				difference(){
@@ -123,7 +123,7 @@ module motor_mount(){
                         }
                     }   
                 }
-        //gear_large();
+        gear_large();
         //twist();
 		//reverse_gear_one();
         //twist_large();
