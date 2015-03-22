@@ -5,7 +5,7 @@ include <gears.scad>;
 
 gearOne = -16.5;
 gear_reverse = -10;
-gearLarge = -33+(gearOne/2);
+gearLarge = -32.6+(gearOne/2);
 
 module dont_render(){
 	module corner(){ 

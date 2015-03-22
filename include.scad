@@ -169,6 +169,6 @@ module bow_support(){
 			translate([-15,0,-15]) cube([30,9,30]);
 			scale([1.05,1.05,1.05]) rotate([0,45,0]) tie_end();
 		}
-		cube([29.7,29.7,29.7], center=true);
+		cube([29.2,29.2,29.2], center=true);
 	}
 }

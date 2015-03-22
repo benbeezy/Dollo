@@ -3,7 +3,7 @@ include <globals.scad>;
 
 
 module basic_corner(){
-rod_size = 5;
+rod_size = .5;
 //////////////////      NORMAL       ////////////////////
 
 module added(){
@@ -21,10 +21,17 @@ module taken(){
 	rotate([0,90,0]) cylinder(d=20, h=28, center=true);
 	rotate([90,0,0]) cylinder(d=20, h=28, center=true);
 	module wrap(){
-				scale([1.1,1.1,1.1]) translate([-20,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=40);
-				scale([1.1,1.1,1.1]) translate([-15,30-2.5,-16]) rotate([0,0,-90]) male_dovetail(height=40);
-				scale([1.1,1.1,1.1]) translate([-15,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=40);
-				scale([1.1,1.1,1.1]) translate([15,30-2.5,-15]) rotate([0,0,90]) male_dovetail(height=40);
+		union(){
+				#translate([-15,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
+				#translate([-15,30-2.5,-15]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
+				#translate([-15,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
+				#translate([15,30-2.5,-15]) rotate([0,0,90]) male_dovetail(height=(30/2)-1);
+			
+				#translate([0,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
+				#translate([-15,30-2.5,0]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
+				#translate([0,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
+				#translate([15,30-2.5,0]) rotate([0,0,90]) male_dovetail(height=(30/2));
+			}
 	}
 	wrap();
 	rotate([0,0,-90]) wrap();
@@ -37,7 +44,7 @@ module taken(){
 
 	//////	support/////
 module support(){
-	translate([0,30,15-.25/2]) rotate([90,180,90]) cube([9,.25,30], center=true);
+	translate([0,30,15-.25/2]) rotate([90,180,90]) cube([11,.4,30], center=true);
 }
 
 module corner() {
@@ -68,6 +75,9 @@ rotate([0,0,-90]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
 	rotate([45,0,0]) corner();
 }
 module full_corner(){
+	
+
+	
 	difference(){
 		translate([0,0,5]) rotate([0,-35,0])basic_corner();
 		union(){
