@@ -23,6 +23,7 @@ thickness = 3;
 hole = 3.5;
 pin_position = 7;
 radius = 37;
+$fn = 60;
 tooth_depth_twist = 2;
 mirror = true;
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
@@ -82,9 +83,9 @@ module motor_mount(){
             }
 
     module gear_one(hole=5.5){
-        translate([0,0,thickness]) mirror([0,0,1]) gear(mm_per_tooth,11,thickness,hole,twist);
-        gear(mm_per_tooth,11,thickness,hole,twist);
-        translate([0,4.5,thickness/2]) cube([5,5,thickness*2], center=true);
+        translate([0,0,thickness]) mirror([0,0,1]) gear(mm_per_tooth,12,thickness,hole,twist);
+        gear(mm_per_tooth,12,thickness,hole,twist);
+        translate([0,4.5,0]) cube([5,5,thickness], center=true);
         }
             module gear_large() {
 				difference(){
@@ -123,7 +124,7 @@ module motor_mount(){
                         }
                     }   
                 }
-        gear_large();
+        //gear_large();
         //twist();
 		//reverse_gear_one();
         //twist_large();

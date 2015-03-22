@@ -10,7 +10,7 @@ tail_depth = 11;
 mount_max = 50+6.25+6.25;
 
 
-$fn=50;
+$fn=220;
 
 diamiter = 3.5;
 

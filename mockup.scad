@@ -5,7 +5,7 @@ include <gears.scad>;
 
 gearOne = -16.5;
 gear_reverse = -10;
-gearLarge = -32.5+(gearOne/2);
+gearLarge = -33+(gearOne/2);
 
 module dont_render(){
 	module corner(){ 
@@ -103,4 +103,4 @@ xdf();
 
 //arm_movement();
 
-dont_render();
+//dont_render();
