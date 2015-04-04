@@ -1,5 +1,6 @@
 $fn = 100;
-length = 12.5;
+length = 13;
+scaling = .81;
 include <include.scad>;
 include <globals.scad>;
 
@@ -23,7 +24,7 @@ module bow_holes() {
 
 rotate([0,45*0,0]){
 difference(){
-	scale([0.9,0.9,0.85]) rotate([0,180,0]) bow_tie_master();
+	scale([scaling,1,1]) rotate([0,180,0]) bow_tie_master();
 	bow_holes();
 }
 }

@@ -59,24 +59,50 @@
 //Normally, you should just choose the first 4 parameters, and let the rest be default values.
 //Meshing gears must match in mm_per_tooth, pressure_angle, and twist,
 //and be separated by the sum of their pitch radii, which can be found with pitch_radius().
+pi= 3.1415926;
+
+twist= 40;
+	//gear settings
+	angle_fix = 2; //use this is you are doing a pressure_angle that is under 28
+	mm_per_tooth_gears    = 4;    //this is the "circular pitch", the circumference of the pitch circle divided by the number of teeth
+	number_of_teeth_gears = 11;   //total number of teeth around the entire perimeter
+	thickness_gears       = 25;    //thickness of gear in mm
+	hole_diameter_gears   = 5.2;    //diameter of the hole in the center, in mm
+	twist_gears           = twist;    //teeth rotate this many degrees from bottom of gear to top.  360 makes the gear a screw with each thread going around once
+	teeth_to_hide_gears   = 0;    //number of teeth to delete to make this only a fraction of a circle
+	pressure_angle_gears  = 28;   //Controls how straight or bulged the tooth sides are. In degrees.
+	clearance_gears       = 0.0;  //gap between top of a tooth on one gear and bottom of valley on a meshing gear (in millimeters)
+	backlash_gears        = 0.0;   //gap between two meshing teeth, in the direction along the circumference of the pitch circle
+	
+	//rack settings
+	angle_fix = .5; //use this is you are doing a pressure_angle is under 28 as a multiplier
+	mm_per_tooth_rack    = 4;    //this is the "circular pitch", the circumference of the pitch circle divided by the number of teeth
+	number_of_teeth_rack = 15;   //total number of teeth along the rack
+	thickness_rack       = 15;    //thickness of rack in mm (affects each tooth)
+	height_rack          = 5;   //height of rack in mm, from tooth top to far side of rack.
+	pressure_angle_rack  = 28;   //Controls how straight or bulged the tooth sides are. In degrees.
+	backlash_rack        = 0.0; //gap between two meshing teeth, in the direction along the circumference of the pitch circle
+	twist_rack			= (number_of_teeth_gears*mm_per_tooth_rack)/360*(twist/1.4 )*2;
+	
+	
 module gear (
-	mm_per_tooth    = 3,    //this is the "circular pitch", the circumference of the pitch circle divided by the number of teeth
-	number_of_teeth = 11,   //total number of teeth around the entire perimeter
-	thickness       = 6,    //thickness of gear in mm
-	hole_diameter   = 3,    //diameter of the hole in the center, in mm
-	twist           = 20,    //teeth rotate this many degrees from bottom of gear to top.  360 makes the gear a screw with each thread going around once
-	teeth_to_hide   = 0,    //number of teeth to delete to make this only a fraction of a circle
-	pressure_angle  = 28,   //Controls how straight or bulged the tooth sides are. In degrees.
-	clearance       = 0.0,  //gap between top of a tooth on one gear and bottom of valley on a meshing gear (in millimeters)
-	backlash        = 0.0   //gap between two meshing teeth, in the direction along the circumference of the pitch circle
+	mm_per_tooth    = mm_per_tooth_gears,
+	number_of_teeth = number_of_teeth_gears,
+	thickness       = thickness_gears,
+	hole_diameter   = hole_diameter_gears,
+	twist           = twist_gears,
+	teeth_to_hide   = teeth_to_hide_gears,
+	pressure_angle  = pressure_angle_gears,
+	clearance       = clearance_gears,
+	backlash        = backlash_gears
 ) {
-	assign(pi = 3.1415926)
-	assign(p  = mm_per_tooth * number_of_teeth / pi / 2)  //radius of pitch circle
-	assign(c  = p + mm_per_tooth / pi - clearance)        //radius of outer circle
-	assign(b  = p*cos(pressure_angle))                    //radius of base circle
-	assign(r  = p-(c-p)-clearance)                        //radius of root circle
-	assign(t  = mm_per_tooth/2-backlash/2)                //tooth thickness at pitch circle
-	assign(k  = -iang(b, p) - t/2/p/pi*180) {             //angle to where involute meets base circle on each side of tooth
+
+	p  = mm_per_tooth * number_of_teeth / pi / 2;  //radius of pitch circle
+	c  = p + mm_per_tooth / pi - clearance;        //radius of outer circle
+	b  = p*cos(pressure_angle);                    //radius of base circle
+	r  = p-(c-p)-clearance;                        //radius of root circle
+	t  = mm_per_tooth/2-backlash/2;                //tooth thickness at pitch circle
+	k  = -iang(b, p) - t/2/p/pi*180;             //angle to where involute meets base circle on each side of tooth
 		difference() {
 			for (i = [0:number_of_teeth-teeth_to_hide-1] )
 				rotate([0,0,i*360/number_of_teeth])
@@ -95,7 +121,6 @@ module gear (
 						);
 			cylinder(h=2*thickness+1, r=hole_diameter/2, center=true, $fn=20);
 		}
-	}
 };	
 //these 4 functions are used by gear
 function polar(r,theta)   = r*[sin(theta), cos(theta)];                            //convert polar to cartesian coordinates
@@ -105,34 +130,49 @@ function q6(b,s,t,d)      = polar(d,s*(iang(b,d)+t));                           
 
 //a rack, which is a straight line with teeth (the same as a segment from a giant gear with a huge number of teeth).
 //The "pitch circle" is a line along the X axis.
+
+
 module rack (
-	mm_per_tooth    = 3,    //this is the "circular pitch", the circumference of the pitch circle divided by the number of teeth
-	number_of_teeth = 11,   //total number of teeth along the rack
-	thickness       = 6,    //thickness of rack in mm (affects each tooth)
-	height          = 120,   //height of rack in mm, from tooth top to far side of rack.
-	pressure_angle  = 28,   //Controls how straight or bulged the tooth sides are. In degrees.
-	backlash        = 0.0   //gap between two meshing teeth, in the direction along the circumference of the pitch circle
+	mm_per_tooth    = mm_per_tooth_rack,
+	number_of_teeth = number_of_teeth_rack,
+	thickness       = thickness_rack,
+	height          = height_rack,
+	pressure_angle  = pressure_angle_rack,
+	backlash        = backlash_rack,
+	twist			= twist_rack,
 ) {
-	assign(pi = 3.1415926)
-	assign(a = mm_per_tooth / pi) //addendum
-	assign(t = a*cos(pressure_angle)-1)         //tooth side is tilted so top/bottom corners move this amount
+	a_rack = mm_per_tooth / pi; //addendum
+	t_rack = a_rack*cos(pressure_angle)-angle_fix;         //tooth side is tilted so top/bottom corners move this amount
 		for (i = [0:number_of_teeth-1] )
-			translate([i*mm_per_tooth,0,0])
-				linear_extrude(height = thickness, center = true, convexity = 10)
-					polygon(
+			rotate([180,0,0]) translate([i*mm_per_tooth,0,0])
+					polyhedron(
 						points=[
-							[-mm_per_tooth * 3/4,                 a-height],
-							[-mm_per_tooth * 3/4 - backlash,     -a],
-							[-mm_per_tooth * 1/4 + backlash - t, -a],
-							[-mm_per_tooth * 1/4 + backlash + t,  a],
-							[ mm_per_tooth * 1/4 - backlash - t,  a],
-							[ mm_per_tooth * 1/4 - backlash + t, -a],
-							[ mm_per_tooth * 3/4 + backlash,     -a],
-							[ mm_per_tooth * 3/4,                 a-height],
+							[-mm_per_tooth * 3/4,                 a_rack-height,0],
+							[-mm_per_tooth * 3/4 - backlash,     -a_rack,0],
+							[-mm_per_tooth * 1/4 + backlash - t_rack, -a_rack,0],
+							[-mm_per_tooth * 1/4 + backlash + t_rack,  a_rack,0],
+							[ mm_per_tooth * 1/4 - backlash - t_rack,  a_rack,0],
+							[ mm_per_tooth * 1/4 - backlash + t_rack, -a_rack,0],
+							[ mm_per_tooth * 3/4 + backlash,     -a_rack,0],
+							[ mm_per_tooth * 3/4,                 a_rack-height,0],
+							
+							[(-mm_per_tooth * 3/4) -twist,                 a_rack-height, thickness],
+							[(-mm_per_tooth * 3/4 - backlash) -twist,     -a_rack, thickness],
+							[(-mm_per_tooth * 1/4 + backlash - t_rack) -twist, -a_rack, thickness],
+							[(-mm_per_tooth * 1/4 + backlash + t_rack) -twist,  a_rack, thickness],
+							[( mm_per_tooth * 1/4 - backlash - t_rack) -twist,  a_rack, thickness],
+							[( mm_per_tooth * 1/4 - backlash + t_rack) -twist, -a_rack, thickness],
+							[( mm_per_tooth * 3/4 + backlash) -twist,     -a_rack, thickness],
+							[( mm_per_tooth * 3/4) -twist,                 a_rack-height, thickness],
+	
 						],
-						paths=[[0,1,2,3,4,5,6,7]]
+						faces=[[0,1,2],[2,3,4],[2,4,5],[5,6,7],[0,2,5],[0,5,7]
+						,[0+8,1+8,2+8],[2+8,3+8,4+8],[2+8,4+8,5+8],[5+8,6+8,7+8],[0+8,2+8,5+8],[0+8,5+8,7+8]
+						,[0,1,0+8], [0+8,1+8,1],[1,1+8,2],[1+8,2+8,2],[2,3,2+8],[3,3+8,2+8],[3+8,4+8,3],[4,3,4+8],[4,4+8,5+8],[5+8,4,5],[5+8,5,6],[5+8,6+8,6],[7,7+8,6],[7+8,6,6+8],[0,0+8,7],[7+8,7,0+8]
+						]
 					);
 };	
+
 
 //These 5 functions let the user find the derived dimensions of the gear.
 //A gear fits within a circle of radius outer_radius, and two gears should have
@@ -144,31 +184,7 @@ function pitch_radius    (mm_per_tooth=3,number_of_teeth=11) = mm_per_tooth * nu
 function outer_radius    (mm_per_tooth=3,number_of_teeth=11,clearance=0.1)    //The gear fits entirely within a cylinder of this radius.
 	= mm_per_tooth*(1+number_of_teeth/2)/3.1415926  - clearance;              
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//example gear train.  
-//Try it with OpenSCAD View/Animate command with 20 steps and 24 FPS.
-//The gears will continue to be rotated to mesh correctly if you change the number of teeth.
 
-n1 = 11; //red gear number of teeth
-n2 = 20; //green gear
-n3 = 5;  //blue gear
-n4 = 20; //orange gear
-n5 = 8;  //gray rack
-mm_per_tooth = 9; //all meshing gears need the same mm_per_tooth (and the same pressure_angle)
-thickness    = 6;
-hole         = 3;
-height       = 12;
-
-d1 =pitch_radius(mm_per_tooth,n1);
-d12=pitch_radius(mm_per_tooth,n1) + pitch_radius(mm_per_tooth,n2);
-d13=pitch_radius(mm_per_tooth,n1) + pitch_radius(mm_per_tooth,n3);
-d14=pitch_radius(mm_per_tooth,n1) + pitch_radius(mm_per_tooth,n4);
-
-//translate([ 0,    0, 0]) rotate([0,0, $t*360/n1])                 color([1.00,0.75,0.75]) gear(mm_per_tooth,n1,thickness,hole);
-//translate([ 0,  d12, 0]) rotate([0,0,-($t+n2/2-0*n1+1/2)*360/n2]) color([0.75,1.00,0.75]) gear(mm_per_tooth,n2,thickness,hole,0,108);
-//translate([ d13,  0, 0]) rotate([0,0,-($t-n3/4+n1/4+1/2)*360/n3]) color([0.75,0.75,1.00]) gear(mm_per_tooth,n3,thickness,hole);
-//translate([ d13,  0, 0]) rotate([0,0,-($t-n3/4+n1/4+1/2)*360/n3]) color([0.75,0.75,1.00]) gear(mm_per_tooth,n3,thickness,hole);
-//translate([-d14,  0, 0]) rotate([0,0,-($t-n4/4-n1/4+1/2-floor(n4/4)-3)*360/n4]) color([1.00,0.75,0.50]) gear(mm_per_tooth,n4,thickness,hole,0,n4-3);
-//translate([(-floor(n5/2)-floor(n1/2)+$t+n1/2-1/2)*9, -d1+0.0, 0]) rotate([0,0,0]) color([0.75,0.75,0.75]) rack(mm_per_tooth,n5,thickness,height);
-
+//gear();
+//rack();
 

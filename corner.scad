@@ -22,15 +22,15 @@ module taken(){
 	rotate([90,0,0]) cylinder(d=20, h=28, center=true);
 	module wrap(){
 		union(){
-				#translate([-15,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
-				#translate([-15,30-2.5,-15]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
-				#translate([-15,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
-				#translate([15,30-2.5,-15]) rotate([0,0,90]) male_dovetail(height=(30/2)-1);
+				translate([-15,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
+				translate([-15,30-2.5,-15]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
+				translate([-15,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
+				translate([15,30-2.5,-15]) rotate([0,0,90]) male_dovetail(height=(30/2)-1);
 			
-				#translate([0,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
-				#translate([-15,30-2.5,0]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
-				#translate([0,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
-				#translate([15,30-2.5,0]) rotate([0,0,90]) male_dovetail(height=(30/2));
+				#translate([0,30-2.5,15]) rotate([90,180,90]) male_dovetail(height=(30/2)+3);
+				translate([-15,30-2.5,0]) rotate([0,0,-90]) male_dovetail(height=(30/2)+3);
+				translate([0,30-2.5,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)+3);
+				translate([15,30-2.5,0]) rotate([0,0,90]) male_dovetail(height=(30/2)+3);
 			}
 	}
 	wrap();
@@ -43,26 +43,12 @@ module taken(){
 }
 
 	//////	support/////
-module support(){
-	translate([0,30,15-.25/2]) rotate([90,180,90]) cube([11,.4,30], center=true);
-}
 
 module corner() {
 	difference(){
 		added();
 		taken();
 	}
-module support_global(){
-support();
-rotate([0,90,0]) support();
-rotate([0,-90,0]) support();
-rotate([0,180,0]) support();
-
-
-};
-support_global();
-rotate([0,0,-90]) support_global();
-rotate([90,0,0]) support_global();
 
 /////////
 translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
@@ -75,17 +61,25 @@ rotate([0,0,-90]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
 	rotate([45,0,0]) corner();
 }
 module full_corner(){
-	
-
+	module support_pillers(){
+		translate([37,0,0]) cylinder(h=1,d=3);
+		translate([34,4,0]) cylinder(h=4,d=3);
+		translate([34,-4,0]) cylinder(h=4,d=3);
+		translate([47,3,0]) cylinder(h=11,d=3);
+		translate([47,-3,0]) cylinder(h=11,d=3);
+	}
+support_pillers();
+rotate([0,0,(360/3)*2]) support_pillers();
+rotate([0,0,(360/3)*1]) support_pillers();
 	
 	difference(){
-		translate([0,0,5]) rotate([0,-35,0])basic_corner();
+		translate([0,0,0]) rotate([0,-35,0])basic_corner();
 		union(){
 			cylinder(h=50, d=15);
 			translate([-20,0,0]) cylinder(h=50, d=7);
 			translate([10,17,0]) cylinder(h=50, d=7);
 			translate([10,-17,0]) cylinder(h=50, d=7);
-			translate([0,0,-20]) cube([200,200,50], center=true);
+			translate([0,0,-25]) cube([200,200,50], center=true);
 		}
 	}
 }
