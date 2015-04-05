@@ -19,13 +19,14 @@ module dont_render(){
 			translate([0,0,100-30]) color([.5,.5,.5]) rotate([0,0,45]) cube([42,42,47], center=true);
 	}
 	module bed(){
-			translate([(0/2)-5,(0/2)-5,100]) color([1,1,1,.4]) rotate([0,0,45]) cube([0,0,5], center=true);
+			translate([(0/2)-5,(0/2)-5,100]) color([1,1,1,.4]) rotate([0,0,45]) cube([220,220,5], center=true);
 	}
 	// middle gear
 						translate([0,0,100-30]) color([1,0,0]) gear_one();
 	module gear_arm(){
 					translate([0+(gearOne+(gearOne/2)),0+(gearOne+(gearOne/2)),100-30]) color([.5,.5,.5]) rotate([0,0,(360/12)*1.5]) middle_gear();
 					translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2)),100-30]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) gear_large();
+		
 	}
 	module gear_arm_reversed(){
 					translate([0+(gear_reverse+(gearOne/2)),0+(gear_reverse+(gearOne/2)),100-30]) color([.5,.5,.5]) rotate([0,0,(360/6)*.25]) reverse_gear_one();
@@ -42,7 +43,7 @@ module dont_render(){
 		rotate([90,0,0]) translate([0,30*3,0]) color([0,0,1]) extention();
 		rotate([0,0,-90]) translate([0,30*3,0]) color([0,0,1]) extention();
 	}
-		bed();
+		//bed();
 		//motor();
 		gear_arm();
 		rotate([0,0,90]) gear_arm();
@@ -50,18 +51,22 @@ module dont_render(){
 		rotate([0,0,-90]) gear_arm_reversed();
 		rotate([0,0,180]) gear_arm_reversed();
 	
-	translate([-220/2,-220/2,0]) frame();
+	translate([-105,-105,0]) frame();
 }
 
 module arm_movement(){
 	difference(){
 		//part im trying to make
 	difference(){
-		translate([-100,-100,30*2]) rotate([0,0,45]) cube([45,45,30*2], center=true);
-		translate([-110+(-15/2),-110+(-15/2),30]) cube([45,45,30*5], center=true);
+		translate([-95,-95,30*2]) rotate([0,0,45]) cube([45,45,30*2], center=true);
+		#translate([-105+(-15/2),-105+(-15/2),30]) cube([45,45,30*5], center=true);
 	}
 	//twist
-			translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2)),100-39]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) twist_large();
+	
+	for (extrude=[0:6]){
+			translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2)),extrude*16]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) twist_large();
+	}
+	
 	
 	}
 }
@@ -99,8 +104,8 @@ module xdf(){
 		rotate([0,0,45*5]) translate([110,0]) square([1,220], center=true);
 		rotate([0,0,45*7]) translate([110,0]) square([1,220], center=true);
 }
-xdf();
+//xdf();
 
-//arm_movement();
+arm_movement();
 
 //dont_render();
