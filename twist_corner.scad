@@ -1,5 +1,6 @@
 include <include.scad>;
 include <globals.scad>;
+include <gears.scad>;
 
 
 
@@ -16,6 +17,10 @@ units = 2;
 r =37;
 mirror = true;
 double = false; //this will make the piece twist in both directions. only works if you have a high pitch screw
+
+gearOne = -16.5;
+gear_reverse = -10;
+gearLarge = -32.6+(gearOne/2);
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 
 
@@ -39,43 +44,36 @@ double = false; //this will make the piece twist in both directions. only works 
 
 
 
-module full(){
 	module wrap(){
-				//scale([1.1,1.1,1.1]) translate([-15,30-2.5,15]) rotate([90,180,90]) mirror([1,1,0]) male_dovetail();
 				scale([1.1,1.1,1.1]) translate([-15,30-2.5,-15]) rotate([0,0,-90]) mirror([0,0,1]) male_dovetail();
 				scale([1.1,1.1,1.1]) translate([-15,30-2.5,-15]) rotate([-90,180,-90]) mirror([0,0,1]) male_dovetail();
-				//scale([1.1,1.1,1.1]) translate([15,30-2.5,-15]) rotate([0,0,90]) mirror([1,1,0]) male_dovetail();
+		
+				rotate([90,0,0]) translate([-35,-1,-15]) cylinder(h=31, r=9);
+				mirror([1,0,-1]) rotate([90,0,0]) translate([-35,-1,-15]) cylinder(h=31, r=9);
+
+	}	
+	module wrap_add(){
+				translate([-15,33,-15]) rotate([0,0,-90]) mirror([0,0,1]) cube([7,32,.5]);
+				translate([-15,33,-15]) rotate([-90,0,-90]) mirror([0,0,1]) cube([7,32,.5]);
 	}
-module main(){
-difference(){
-    translate([22,22,0]) difference(){
-        rotate([0,0,45]) translate([0,0,30*units/2]) cube([30,30,30*units], center=true);
-        rotate([0,0,0]) translate([15,15,30*units/2]) cube([30,30,30*units], center=true);
-    }
-for (i = [0:4*units]) {
-translate([tooth_depth,tooth_depth,i*15/2]) scale([1,1,1]) linear_extrude(height = 8, center = false, convexity = 10, twist = 360, $fn = 50) translate([twisted_depth, 0, 0]) circle(r = r);
-	if (double==true) {
-	translate([tooth_depth,tooth_depth,i*15/2]) scale([1,1,1]) linear_extrude(height = 8, center = false, convexity = 10, twist = -360, $fn = 50) translate([twisted_depth, 0, 0]) circle(r = r);
+
+module arm_movement(){
+	difference(){
+		//part im trying to make
+	difference(){
+		translate([-95,-95,30]) rotate([0,0,45]) cube([45,45,(30*2)-1], center=true);
+		translate([-105+(-15/2),-105+(-15/2),30]) cube([45,45,30*5], center=true);
+	}
+	//twist
+	
+	for (extrude=[0:3]){
+		translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2)),extrude*16]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) twist_large();
+		translate([21.5-95,21.5-95,extrude*30-45]) rotate([90,0,90]) wrap();
+	}
+	
+	}
+	for (support = [1:2]){
+		translate([-105,-74.5,support*30-45]) rotate([90,0,180])  wrap_add();
 	}
 }
-}
-}
-
-
-difference(){
-    main();
-    #for (i=[0:units-1]){
-    #translate([7,7,(i*30)-15]) rotate([90,0,-90]) wrap();
-    }
-}
-    for (i=[0:units-1]){
-        #translate([22,43-21,(i*30)]) rotate([90,0,0]) cube([20,30,1]);
-        translate([22,43,(i*30)]) rotate([90,0,-90]) cube([20,30,1]);
-    }
-}
-
-if (mirror==true) {
-	mirror([0,0,1]) full();
-} else {
-	full();
-}
+translate([95,95,0]) arm_movement();
