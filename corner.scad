@@ -69,7 +69,7 @@ rotate([0,0,(360/3)*2]) support_pillers();
 	
 	difference(){
 		translate([0,0,0]) rotate([45,-35,0]) union(){
-			basic_corner();
+			rotate([0,0,45]) basic_corner();
 			rotate([-90,0,-15]) basic_corner();
 			rotate([0,90,15]) basic_corner();
 		}
