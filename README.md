@@ -45,6 +45,36 @@ a fully printed 3D printer
 
 3 x gear.scad
 
+Metal parts we hope to get rid of in the future
+
+11 x M3x40  for the motor mounts and bed gears
+
+5 x M3x10  for the motor mounts and bed gears
+
+4 x M3x20  for the z motor
+
+4 x M3 lock nuts  for the bed gears
+
+Electronics and other
+
+1 x main controller board (we use RAMBo and also like the idea of printing the pcb and solding the componants your self)
+
+3 x end stop switches   we are trying to come up with a clever way of doing with with printed conductive parts
+
+5 x motors
+
+1 x hotend or whatever tool tip you want really
+
+1 x hobbed thing, gear or bolt
+
+1 x bearing for extruder (might be able to print)
+
+1 x heated bed
+
+1 x glass/aluminum that fits on the bed
+
+4 x springs and screw for leveling your bed.
+
 
 # How to assemble
 1) start with the basic frame, take a single corner and butt joint all 3 extention pieces to it with all 4 bow_tie slots. then on the end of each of those add corner pieces then extention pieces agian untill you have built out a full cube shape.
@@ -68,3 +98,24 @@ a fully printed 3D printer
 10) setting up the extruder. Not sure what extruder we are going to use yet, but if you have done 3D printing before you should know how all of that works and be able to get it going.
 
 
+# Extra cool facts
+
+1) I can up with the origional version of this when I was 16 and in high school and it was done in blender becuase that all I knew how to use
+
+2) This printer as it stands is under 1KG of printed parts 
+
+3) We printed the first Dollo on 3 Prusa Mendal printer that were printer on other printers them selves and so on, all the way back to the start, so these machine have no only open-source in their genealogy
+
+4) I lived 300 miles from the printer that I used and did all of the printing over the internet using octopi to print the first Dollo
+
+5) The Dollo can (if you want) have a metal core structure, we built it in just in case and it saved plastic so it was a win win.
+
+6) The Dollo was made by a me and my dad, I didnt the modeling and he helped me come up with ideas on how to fix the issues I has on the way, and he test fit most of the pieces (the printers were at his house)
+
+7) The Dollo has swappeable tool heads so you can mill metal parts if you want!
+
+8) We had no plans on how this was going to work before starting. We have gone through probably close to a 50 different ideas on how this thing should even work.
+
+9) Half way though we almost gave up on the z and made the Dollo a Delta style printer (might still have something like that in the future)
+
+10) We looked at alot of other peoples printer before we could figure out how to do this one, we really could not have done it with out the community.
