@@ -8,8 +8,6 @@ rod_size = .5;
 
 module added(){
 		translate([0,0,15]) cube([obj_leg,obj_leg,obj_leg*2], center=true);
-		translate([0,15,0]) cube([obj_leg,obj_leg*2,obj_leg], center=true);
-		translate([15,0,0]) cube([obj_leg*2,obj_leg,obj_leg], center=true);
 }
 
 
@@ -51,14 +49,12 @@ module corner() {
 	}
 
 /////////
-translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
 rotate([90,0,0]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
-rotate([0,0,-90]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
 /////////
 
-};
+}
 
-	rotate([45,0,0]) corner();
+	corner();
 }
 module full_corner(){
 	module support_pillers(){
@@ -68,12 +64,15 @@ module full_corner(){
 		translate([47,3,0]) cylinder(h=11,d=4);
 		translate([47,-3,0]) cylinder(h=11,d=4);
 	}
-support_pillers();
+
 rotate([0,0,(360/3)*2]) support_pillers();
-rotate([0,0,(360/3)*1]) support_pillers();
 	
 	difference(){
-		translate([0,0,0]) rotate([0,-35,0])basic_corner();
+		translate([0,0,0]) rotate([45,-35,0]) union(){
+			basic_corner();
+			rotate([-90,0,-15]) basic_corner();
+			rotate([0,90,15]) basic_corner();
+		}
 		union(){
 			cylinder(h=50, d=15);
 			translate([-20,0,0]) cylinder(h=50, d=7);
