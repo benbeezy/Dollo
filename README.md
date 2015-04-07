@@ -2,28 +2,49 @@
 a fully printed 3D printer
 
 # Goals in order of priority
+
 1) Make a 3D printer that can make as many of its own parts as possible
+
 2) Have it so the machine can scale with little to no throwing away of old parts
+
 3) Make it easy to assemble
+
 4) Use no more than a single 1KG spool of plastic to make.
+
 5) Make it as low cost as possible.
+
 6) use parts that are each to find.
+
 7) make it durrable (since it can print its own parts this isnt super high priority)
+
 8) hope people stop asking "what if you could 3D print a 3D printer" because of cource you can and its not that unique of an idea
 
 # Part count and list for small Dollo
+
 9 x rack.scad
+
 13 x extention.scad
+
 8 x corner.scad
+
 156 x bow_tie.scad but extra never hurts
+
 2 x x_spacer.scad
+
 6 x motor_mount.scad
+
 6 x twist_corner.scad
+
 2 x large_gear from gears.scad
+
 2 x middle_gear from gears.scad
+
 1 x gear_one from gears.scad
+
 1 x hot_end_mount
+
 3 x gear.scad
+
 
 # How to assemble
 1) start with the basic frame, take a single corner and butt joint all 3 extention pieces to it with all 4 bow_tie slots. then on the end of each of those add corner pieces then extention pieces agian untill you have built out a full cube shape.
