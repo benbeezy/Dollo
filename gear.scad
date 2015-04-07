@@ -3,7 +3,7 @@ $fn=50;
 obj_round = 50;
 obj_height = 50;
 shaft = 5.2;
-cylinder(h=40, d=16);
+
 module master(){
 	module rightGear(twist) {
 		rotate([0, 0, -25]) {
@@ -44,23 +44,6 @@ gearObject();
 }
 
 intersection(){
-cylinder(h=35, d=20, center=true);
+
 master();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

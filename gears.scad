@@ -119,8 +119,11 @@ module motor_mount(){
                 }
               module twist_large() {
                 difference() {
-                    linear_extrude(height = 8*2, center = false, convexity = 10, twist = 360*2, $fn = 50) translate([2, 0, 0]) circle(r = 37);
-                        union(){
+                    linear_extrude(height = 8*2, center = false, convexity = 10, twist = 360*2, $fn = 50) translate([2, 0, 0]){
+						circle(r = 37);
+
+					}
+						union(){
                             #translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
                             #translate([0, 0, 0]) pins(height=20, d=6 );
                         }

@@ -62,11 +62,11 @@ rotate([0,0,-90]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
 }
 module full_corner(){
 	module support_pillers(){
-		translate([37,0,0]) cylinder(h=1,d=3);
-		translate([34,4,0]) cylinder(h=4,d=3);
-		translate([34,-4,0]) cylinder(h=4,d=3);
-		translate([47,3,0]) cylinder(h=11,d=3);
-		translate([47,-3,0]) cylinder(h=11,d=3);
+		translate([37,0,0]) cylinder(h=1,d=4);
+		translate([34,4,0]) cylinder(h=4,d=4);
+		translate([34,-4,0]) cylinder(h=4,d=4);
+		translate([47,3,0]) cylinder(h=11,d=4);
+		translate([47,-3,0]) cylinder(h=11,d=4);
 	}
 support_pillers();
 rotate([0,0,(360/3)*2]) support_pillers();

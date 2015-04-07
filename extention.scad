@@ -10,13 +10,6 @@ module added(){
 }
 
 module subtracted(){
-	module wrap(){
-		depth = 30;
-				scale([1,1,1]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,90,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,180,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,-90,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-	}
 
 
 rotate([0,45,0]) translate([0,-45,0]) tie_end();
@@ -72,10 +65,10 @@ subtracted();
 		rotate([0,0,0]) translate([0,(obj_leg*2.5)-8,-20]) cylinder(h=40, d=6, $fn=20);
 		
 		one = 10;
-		translate([one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		translate([-one,-one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		translate([-one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		translate([one,one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
+		//translate([one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
+		//translate([-one,-one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
+		//translate([-one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
+		//translate([one,one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
 		
 	}
 

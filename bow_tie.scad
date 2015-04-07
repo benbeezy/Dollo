@@ -1,9 +1,10 @@
-$fn = 100;
+smoothing = 100;
 length = 13;
 scaling = .81;
 include <include.scad>;
 include <globals.scad>;
 
+$fn = smoothing;
 module bow_tie_master(){
 union(){
 	mirror([0,1,0]) intersection(){
