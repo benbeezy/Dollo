@@ -2,14 +2,16 @@ include <include.scad>;
 include <globals.scad>;
 
 
+
+	tolerance = 3;
 module basic_corner(){
 rod_size = .5;
 //////////////////      NORMAL       ////////////////////
 
 module added(){
-		translate([0,0,15]) cube([obj_leg,obj_leg,obj_leg*2], center=true);
-		translate([0,15,0]) cube([obj_leg,obj_leg*2,obj_leg], center=true);
-		translate([15,0,0]) cube([obj_leg*2,obj_leg,obj_leg], center=true);
+		translate([0,0,15-tolerance]) cube([obj_leg,obj_leg,obj_leg*2], center=true);
+		translate([0,15-tolerance,0]) cube([obj_leg,obj_leg*2,obj_leg], center=true);
+		translate([15-tolerance,0,0]) cube([obj_leg*2,obj_leg,obj_leg], center=true);
 }
 
 
@@ -36,9 +38,9 @@ module taken(){
 	wrap();
 	rotate([0,0,-90]) wrap();
 	rotate([90,0,0]) wrap();
-	rotate([0,45,180]) translate([0,-45,0]) tie_end();
-	rotate([0,45,90]) translate([0,-45,0]) tie_end();
-	rotate([-90,0,45]) translate([0,-45,0]) tie_end();
+	rotate([0,45,180]) translate([0,-45+tolerance,0]) tie_end();
+	rotate([0,45,90]) translate([0,-45+tolerance,0]) tie_end();
+	rotate([-90,0,45]) translate([0,-45+tolerance,0]) tie_end();
 
 }
 
@@ -51,9 +53,9 @@ module corner() {
 	}
 
 /////////
-translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
-rotate([90,0,0]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
-rotate([0,0,-90]) translate([0,obj_leg*2-15,0]) rotate([0,0,180]) bow_support();
+translate([0,obj_leg*2-15-tolerance,0]) rotate([0,0,180]) bow_support();
+rotate([90,0,0]) translate([0,obj_leg*2-15-tolerance,0]) rotate([0,0,180]) bow_support();
+rotate([0,0,-90]) translate([0,obj_leg*2-15-tolerance,0]) rotate([0,0,180]) bow_support();
 /////////
 
 };
@@ -65,8 +67,8 @@ module full_corner(){
 		translate([37,0,0]) cylinder(h=1,d=4);
 		translate([34,4,0]) cylinder(h=4,d=4);
 		translate([34,-4,0]) cylinder(h=4,d=4);
-		translate([47,3,0]) cylinder(h=11,d=4);
-		translate([47,-3,0]) cylinder(h=11,d=4);
+		translate([47-tolerance/2,3,0]) cylinder(h=9.5,d=4);
+		translate([47-tolerance/2,-3,0]) cylinder(h=9.5,d=4);
 	}
 support_pillers();
 rotate([0,0,(360/3)*2]) support_pillers();
