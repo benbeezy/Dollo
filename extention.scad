@@ -1,83 +1,67 @@
 include <include.scad>;
 include <globals.scad>;
 metal_rod_size = 9;
-units = 4;
 
+//min number of units is 2
+//max is however large your printer can print
+units = 3;
 
 module extention(){
-module added(){
-		translate([0,15,0]) cube([30,30*units,30], center=true);
-}
-
-module subtracted(){
-
-
-rotate([0,45,0]) translate([0,-45,0]) tie_end();
-rotate([0,45,0]) translate([0,obj_leg*2.5,0]) rotate([0,0,180]) tie_end();
-
-
-rotate([90,0,0]) cylinder(h=5000, d= metal_rod_size, center=true);
-
-
-for (y = [-2:units-3]) // two iterations, z = -1, z = 1
-{
-    translate([0, y*30, 0]) wrap();
-	//translate([6,y*30+(30),-16]) cylinder(h=35, d=4, $fn=20);
-	//translate([-6,y*30+(30),-16]) cylinder(h=35, d=4, $fn=20);
-		
-	//rotate([0,90,0]) translate([6,y*30+(30),-16]) cylinder(h=35, d=4, $fn=20);
-	//rotate([0,90,0]) translate([-6,y*30+(30),-16]) cylinder(h=35, d=4, $fn=20);
-}
-for (y = [-1:1]) // two iterations, z = -1, z = 1
-{
-    translate([0, y*30, 0]){
-				translate([0,15,-16]) cylinder(h=35, d=18);
-				rotate([0,90,0]) translate([0,15,-16]) cylinder(h=35, d=18);
-
+	
+	module added(){
+			translate([0,0,0]) cube([30,30*units,30]);
 	}
-}
 
+	module subtracted(){
+		
+	translate([15,0,15]) rotate([0,45,0]) tie_end();
+	translate([15,units*30,15]) rotate([0,45,0]) rotate([0,0,180]) tie_end();
+	translate([15,15,15]) rotate([90,0,0]) cylinder(h=5000, d= metal_rod_size, center=true);
 
-}
-
-
-difference(){
-added();
-subtracted();
-}
-	module middle_bars(){
-				for (y = [-1:units-2]) {
-			translate([0, y*30, 0]){
-						cube([30,12,1], center=true);
-						rotate([0,90,0]) cube([30,12,1], center=true);
+	for (y = [-1:units-2]) // two iterations, z = -1, z = 1
+	{
+		difference(){
+			translate([15, (y*30)+15, 15]){
+				wrap();
+				translate([15,30,0]) cube([5,5,50],center=true);
+				translate([-15,30,0]) cube([5,5,50],center=true);
+				translate([0,30,15]) cube([50,5,5],center=true);
+				translate([0,30,-15]) cube([50,5,5],center=true);
+			}
+			union(){
+				translate([15.5,y*30+30,0]) cube([.5,30,30]);
+				rotate([0,90,0]) translate([-15.5,y*30+30,0]) cube([.5,30,30]);
 			}
 		}
 	}
-	difference(){
-		 middle_bars();
-		rotate([90,0,0]) cylinder(h=5000, d= 8.5, center=true);
+	for (y = [0:units-2]) // two iterations, z = -1, z = 1
+	{
+		translate([15, (y*30)+15, 15]){
+					translate([0,15,-16]) cylinder(h=35, d=18);
+					rotate([0,90,0]) translate([0,15,-16]) cylinder(h=35, d=18);
+		}
 	}
+	}
+	difference(){
+		added();
+		subtracted();
+	}	
 }
+
 	module holes(){
-		rotate([0,90,0]) translate([0,-38,-20]) cylinder(h=40, d=6, $fn=20);
-		rotate([0,90,0]) translate([0,(obj_leg*2.5)-8,-20]) cylinder(h=40, d=6, $fn=20);
-		rotate([0,0,0]) translate([0,-38,-20]) cylinder(h=40, d=6, $fn=20);
-		rotate([0,0,0]) translate([0,(obj_leg*2.5)-8,-20]) cylinder(h=40, d=6, $fn=20);
-		
-		one = 10;
-		//translate([one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		//translate([-one,-one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		//translate([-one,one,one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		//translate([one,one,-one]) rotate([90,0,0]) cylinder(h=5000, d=5, center=true, $fn=20);
-		
+		rotate([0,90,0]) translate([-15,7,0]) cylinder(h=40, d=6, $fn=20);
+		rotate([0,90,0]) translate([-15,0+(units*30)-7,0]) cylinder(h=40, d=6, $fn=20);
+		translate([15,7,0]) cylinder(h=40, d=6, $fn=20);
+		translate([15,0+(units*30)-7,0]) cylinder(h=40, d=6, $fn=20);
 	}
 
 //support
-translate([13,75-.5,-15+2.5]) cylinder(h=5, d=6, center=true);
-translate([13,-45+.5,-15+2.5]) cylinder(h=5, d=6, center=true);
 
-translate([-13,75-.5,-15+2.5]) cylinder(h=5, d=6, center=true);
-translate([-13,-45+.5,-15+2.5]) cylinder(h=5, d=6, center=true);
+translate([0,0,5/2]) cylinder(h=5, d=6, center=true);
+translate([30,0,5/2]) cylinder(h=5, d=6, center=true);
+	
+translate([0,units*30,5/2]) cylinder(h=5, d=6, center=true);
+translate([30,units*30,5/2]) cylinder(h=5, d=6, center=true);
 
 difference(){
 	extention();
