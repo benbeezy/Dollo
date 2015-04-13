@@ -28,10 +28,10 @@ module bow_holes() {
 module finished(){
 	rotate([0,45*0,0]){
 		difference(){
-			scale([scaling_x,scaling_y,scaling_z]) rotate([0,180,0]) bow_tie_master();
+			rotate([0,180,0]) bow_tie_master();
 			bow_holes();
 		}
 	}
 }
 
-finished();
+scale([scaling_x,scaling_y,scaling_z]) finished();
