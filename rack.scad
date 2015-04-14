@@ -6,14 +6,19 @@ include <globals.scad>;
 obj_height = 40;
 units = 2;
 tail_depth = 8;
-tie_scale_x = 1.1;
+tie_scale_x = 1;
 tie_scale_y = 1.1;
 tie_scale_z = 1.2;
 
 //herring bone style rack made from inkscape and OpenScad
 				module tie_taken(){
-					#translate([0,tail_depth,.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
-				    translate([0,tail_depth,-30.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
+					difference(){
+						union(){
+							translate([0,tail_depth,.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
+							translate([0,tail_depth,-30.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
+						}
+						cube([10,20,1], center=true);
+					}
 				}
 module rackObject() {
 
@@ -66,25 +71,34 @@ module rounded_cube(width,depth,height){
     }
 }    
 intersection(){
-    			rotate([-90,0,0]) translate([-10,0,0]) translate([30,0,0]) rounded_cube(30*units+10,16,40,$fn=50);
-union(){ rotate([-90,0,0]) intersection(){
-	difference(){
-		rackObject();
-		for(rack_length=[-1:1]){ 
-				translate([30*rack_length+9,0,0]) tie_taken();
-		}
+//translate([0,0,-10]) cube([20,20,20]);
+	intersection(){
+					rotate([-90,0,0]) translate([-10,0,0]) translate([30,0,0]) rounded_cube(30*units+10,16,40,$fn=50);
+	union(){ 
+		rotate([-90,0,0]) intersection(){
+			difference(){
+				rackObject();
+				for(rack_length=[-1:1]){ 
+						translate([30*rack_length+9,0,0]) tie_taken();
+				}
+			}
+
+			difference(){
+				union(){
+					translate([30,0,0]) rounded_cube(30*units,16,40,$fn=50);
+					translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
+					mirror([0,0,1]) translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
+				}
+				union(){
+					translate([47.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
+					mirror([0,0,1]) translate([47.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
+				}
+			}
+	//intersection
 	}
-	difference(){
-		union(){
-			translate([30,0,0]) rounded_cube(30*units,16,40,$fn=50);
-            translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
-            mirror([0,0,1]) translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
-		}
-		union(){
-			translate([47.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
-			mirror([0,0,1]) translate([47.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
-		}
+	//union
 	}
-}
-}
+	//intersection
+	}
+//intersection
 }

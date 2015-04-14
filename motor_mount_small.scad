@@ -8,9 +8,10 @@ include <include.scad>;
 frame_width = 35.5;
 tail_depth = 11;
 mount_max = 50+6.25+6.25;
+wabble = 0;
+not_tooth_gap = 8;
 
-
-$fn=220;
+//$fn=220;
 
 diamiter = 3.5;
 
@@ -39,8 +40,11 @@ module y_mount_added(){
 	translate([0,frame_width-15.5,2.5]) rounded_cube(height = 5, width = 50, depth = 11, diamiter = 3.5);
 //towers
 	translate([0-21,-25.75,0]) cube([42,18,15+2.5+4.25]);
-	translate([(32-21-4)+18/2,(11-21)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,17.5+4.25);
-	translate([(-21-4)+25/2,    (11-21)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,17.5+4.25);
+	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,17.5+4.25);
+	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,17.5+4.25);
+
+	#translate([frame_width-13,3.5,2.5]) rounded_cube(height = 4, width = 5, depth = 3+not_tooth_gap, diamiter = 2);
+	#translate([-(frame_width-13),3.5,2.5]) rounded_cube(height = 4, width = 5, depth = 3+not_tooth_gap, diamiter = 2);
 }
 
 module y_mount_taken(){

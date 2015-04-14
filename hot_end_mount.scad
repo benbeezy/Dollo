@@ -4,7 +4,7 @@ include <include.scad>;
 hotend_depth = 75;
 mounting_diamiter = 13;
 arm_thickness = 5;
-snap_location = 20;
+snap_location = 36;
 
 module motor_mount_small(height=15){
 	scale([.9,.9,.9]) 	translate([-8.75,1,0]) male_dovetail(height);
@@ -15,7 +15,7 @@ module y_mount_added(){
 	motor_mount_small();
 	translate([0,-4+((10-arm_thickness)/2),hotend_depth/2]) cube([24.75,arm_thickness,hotend_depth], center=true);
     translate([0,-15,hotend_depth-(5.8/2)]) cube([25,30,5.8],center=true);
-	translate([0,1,snap_location]) cube([25,5,5],center=true);
+	translate([0,1,16+snap_location]) cube([25,8,5],center=true);
 }
 
 module y_mount_taken(){
