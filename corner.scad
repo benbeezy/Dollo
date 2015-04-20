@@ -5,7 +5,7 @@ include <globals.scad>;
 	rod_size = .5;
 module basic_corner(){
 	module added(){
-			#translate([0,0,15]) cube([obj_leg,obj_leg,obj_leg*2], center=true);
+			translate([0,0,15]) cube([obj_leg,obj_leg,obj_leg*2], center=true);
 			translate([0,15,0]) cube([obj_leg,obj_leg*2,obj_leg], center=true);
 			translate([15,0,0]) cube([obj_leg*2,obj_leg,obj_leg], center=true);
 	}
@@ -18,7 +18,7 @@ module basic_corner(){
 		rotate([90,0,0]) cylinder(d=20, h=28, center=true);
 		module wrap(){
 			union(){
-					#translate([-15,30+slot_translate,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
+					translate([-15,30+slot_translate,15]) rotate([90,180,90]) male_dovetail(height=(30/2)-1);
 					translate([-15,30+slot_translate,-15]) rotate([0,0,-90]) male_dovetail(height=(30/2)-1);
 					translate([-15,30+slot_translate,-15]) rotate([-90,180,-90]) male_dovetail(height=(30/2)-1);
 					translate([15,30+slot_translate,-15]) rotate([0,0,90]) male_dovetail(height=(30/2)-1);
@@ -47,14 +47,15 @@ module basic_corner(){
 };
 module full_corner(){
 	module support_pillers(){
-		translate([37,0,0]) cylinder(h=1,d=4);
-		translate([34,4,0]) cylinder(h=4,d=4);
-		translate([34,-4,0]) cylinder(h=4,d=4);
-		translate([47-slot_translate/2,3,0]) cylinder(h=9.5,d=4);
-		translate([47-slot_translate/2,-3,0]) cylinder(h=9.5,d=4);
+		translate([40,0,0]) cylinder(h=2.5,d=4);
+		translate([37,4,0]) cylinder(h=5,d=4);
+		translate([37,-4,0]) cylinder(h=5,d=4);
 		
-		translate([36-slot_translate/2,19,0]) cylinder(h=28,d=4);
-		translate([36-slot_translate/2,-19,0]) cylinder(h=28,d=4);
+		translate([48-slot_translate/2,3,0]) cylinder(h=11,d=4);
+		translate([48-slot_translate/2,-3,0]) cylinder(h=11,d=4);
+		
+		translate([39-slot_translate/2,18,24]) rotate([0,-40,0]) cylinder(h=6,d=4);
+		translate([39-slot_translate/2,-18,24]) rotate([0,-40,0]) cylinder(h=6,d=4);
 	}
 support_pillers();
 rotate([0,0,(360/3)*2]) support_pillers();
