@@ -11,7 +11,7 @@ include <gears.scad>;
 
 
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
-tooth_depth = sqrt(18)/2;
+tooth_depth = (sqrt(18)/2)+2;
 twisted_depth = 2;
 units = 2;
 r =37;
@@ -22,8 +22,6 @@ gearOne = -16.5;
 gear_reverse = -10;
 gearLarge = -32.6+(gearOne/2);
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
-
-
 
 
 
@@ -76,4 +74,14 @@ module arm_movement(){
 		translate([-105,-74.5,support*30-45]) rotate([90,0,180])  wrap_add();
 	}
 }
+intersection(){
 translate([95,95,0]) arm_movement();
+hull(){
+	translate([tooth_depth+26,1,0]) cylinder(h=units*30, r=2);
+	translate([1,tooth_depth+26,0]) cylinder(h=units*30, r=2);
+
+	translate([-(tooth_depth+26),1,0]) cylinder(h=units*30, r=2);
+	translate([1,-(tooth_depth+26),0]) cylinder(h=units*30, r=2);
+}
+	
+}
