@@ -50,8 +50,8 @@ module rackFull(){
 		}
 		for(rack_length=[-1:1]){ 
 			difference(){
-				translate([30*rack_length+15,5,0]) cube([30,6,40], center=true);
-				translate([30*rack_length+9,0,0]) tie_taken();
+				translate([30*rack_length+15,6,0]) cube([30,8,40], center=true);
+				//translate([30*rack_length+9,0,0]) tie_taken();
 			}
 		}
 }
@@ -73,19 +73,19 @@ module rounded_cube(width,depth,height){
 intersection(){
 //translate([0,0,-10]) cube([20,20,20]);
 	intersection(){
-					rotate([-90,0,0]) translate([-10,0,0]) translate([30,0,0]) rounded_cube(30*units+10,16,40,$fn=50);
+					rotate([-90,0,0]) translate([-10,0,0]) translate([30,0,0]) rounded_cube(30*units+10,20,40,$fn=50);
 	union(){ 
 		rotate([-90,0,0]) intersection(){
 			difference(){
 				rackObject();
 				for(rack_length=[-1:1]){ 
-						translate([30*rack_length+9,0,0]) tie_taken();
+						translate([30*rack_length+9,2,0]) tie_taken();
 				}
 			}
 
 			difference(){
 				union(){
-					translate([30,0,0]) rounded_cube(30*units,16,40,$fn=50);
+					translate([30,0,0]) rounded_cube(30*units,20,40,$fn=50);
 					translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
 					mirror([0,0,1]) translate([-12.5,-5,0]) rotate([0,25,0]) cube([30,30,30]);
 				}

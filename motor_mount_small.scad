@@ -8,8 +8,9 @@ include <include.scad>;
 frame_width = 35.5;
 tail_depth = 11;
 mount_max = 50+6.25+6.25;
-wabble = 0;
-not_tooth_gap = 4;
+wabble = 1.5;
+not_tooth_gap = 0;
+rack_gap = 3;
 
 //$fn=220;
 
@@ -33,18 +34,18 @@ module rounded_cube(width,depth,height){
 
 module y_mount_added(){    
     
-    translate([0,2.25-2.25,-1]) rounded_cube(depth = 50, width = frame_width+15+1, height=4, center=true);
+    translate([0,2.25-2.25+rack_gap/2,-1]) rounded_cube(depth = 50+rack_gap*2, width = frame_width+15+1, height=4, center=true);
 
     
     
-	translate([0,frame_width-15.5,2.5]) rounded_cube(height = 5, width = 50, depth = 11, diameter = 3.5);
+	translate([0,frame_width-15.5+rack_gap,2.5]) rounded_cube(height = 5, width = 50, depth = 11, diameter = 3.5);
 //towers
-	translate([0-21,-25.75,0]) cube([42,18,15+2.5+4.25]);
-	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,17.5+4.25);
-	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,17.5+4.25);
+	translate([0-21,-25.75,0]) cube([42,18,15+2.5+3.5]);
+	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,17.5+3.5);
+	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,17.5+3.5);
 
-	#translate([17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
-	#translate([-17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
+	//#translate([17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
+	//#translate([-17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
 }
 
 module y_mount_taken(){

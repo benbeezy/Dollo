@@ -1,6 +1,6 @@
 smoothing = 100;
 length = 13;
-scaling_x = .81;
+scaling_x = .9;
 scaling_y = 1;
 scaling_z = 1;
 include <include.scad>;

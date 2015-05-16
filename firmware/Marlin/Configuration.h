@@ -474,7 +474,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {63, 63, 63, (200/6*5)}  // steps per unit with aluminum gears and a wades geared extruder
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {63, 63, 63, 73.33}  // steps per unit with aluminum gears and a wades geared extruder
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {50, 50, 50, 7.95774754364*18}  //direct driven humming bird 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 300, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
