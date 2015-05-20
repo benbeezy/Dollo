@@ -112,27 +112,27 @@ module motor_mount(){
                 difference() {
                     translate([35,35,0]) linear_extrude(height = 10, center = false, convexity = 10, twist = 360, $fn = 50) translate([tooth_depth_twist, 0, 0]) circle(r = radius);
                         union(){
-                            #translate([35,35,3]) cylinder(d=3.5, h=50, center=true);
-                            #translate([35, 35, 0]) pins(height=20, d=5.5 );
+                            translate([35,35,3]) cylinder(d=3.5, h=50, center=true);
+                            translate([35, 35, 0]) pins(height=20, d=5.5 );
                         }
                     }   
                 }
               module twist_large() {
                 difference() {
-                    linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 50) translate([2, 0, 0]){
+                    linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 100) translate([2, 0, 0]){
 						circle(r = 37);
 
 					}
 						union(){
-                            #translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
-                            #translate([0, 0, 0]) pins(height=20, d=3.5 );
+                            translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
+                            translate([0, 0, 0]) pins(height=20, d=3.5 );
                         }
                     }   
                 }
         //gear_large();
         //twist();
 		//reverse_gear_one();
-       // twist_large();
+        //twist_large();
         //middle_gear();
         //gear_one();
 
