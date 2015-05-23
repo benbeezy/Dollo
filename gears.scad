@@ -89,13 +89,30 @@ module motor_mount(){
         gear(mm_per_tooth_gears,12,thickness_gears,hole_diameter_gears,twist_gears);
         translate([0,4.5,0]) cube([5,5,thickness_gears], center=true);
         }
+		
+		
+		//test
+
+		//end test
+		
+		
             module gear_large() {
-				difference(){
-					union(){
-						translate([0,0,thickness_gears]) mirror([0,0,1]) gear(mm_per_tooth_gears,22,thickness_gears,hole_diameter_gears,twist_gears);
-						gear(mm_per_tooth_gears,22,thickness_gears,hole_diameter_gears,twist_gears);
+				intersection(){
+					 difference(){
+						union(){
+							translate([0,0,0]) gear(mm_per_tooth_gears,22,thickness_gears+8,hole_diameter_gears,twist_gears);
+							
+							translate([0,0,(-10*2)-1.5]) linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 100) translate([2, 0, 0]){
+								circle(r = 37);
+							}
+						}
+							cylinder(h=100, d=3.25, center=true);
+							#translate([0,0,(-10*2)-3]) sphere(d=6, center=true);
 					}
-						rotate([0,0,45]) pins(z=-4);
+						#hull(){
+							translate([0,0,8])rotate_extrude(convexity = 10, $fn = 100) translate([40, 0, 0]) circle(r = 3, $fn = 100);
+							translate([0,0,-19]) rotate_extrude(convexity = 10, $fn = 100) translate([35.5, 0, 0]) circle(r = 3, $fn = 100);
+						}
 				}
 			}
             module middle_gear(){         
@@ -127,7 +144,7 @@ module motor_mount(){
                             translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
                             translate([0, 0, 0]) pins(height=20, d=3.5 );
                         }
-                    }   
+                    }
                 }
         //gear_large();
         //twist();
