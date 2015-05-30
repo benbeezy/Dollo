@@ -23,11 +23,12 @@ thickness_gears = 3;
 hole_diameter_gears = 3.5;
 pin_position = 7;
 radius = 37;
-$fn = 60;
+$fn = 40;
 tooth_depth_twist = 2;
 mirror = true;
 mm_per_tooth_gears    = 9;
 pressure_angle_gears  = 28;
+twist_height_units = 3;
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 
 
@@ -97,23 +98,25 @@ module motor_mount(){
 		
 		
             module gear_large() {
-				intersection(){
 					 difference(){
 						union(){
-							translate([0,0,0]) gear(mm_per_tooth_gears,22,thickness_gears+8,hole_diameter_gears,twist_gears);
-							
-							translate([0,0,(-10*2)-1.5]) linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 100) translate([2, 0, 0]){
-								circle(r = 37);
+							difference(){
+								translate([0,0,0]) gear(mm_per_tooth_gears,22,thickness_gears+8,hole_diameter_gears,twist_gears);
+								translate([15,-4,4]) linear_extrude(h=20) text("", font="fontawesome");
+								
+							}
+							intersection(){
+								hull(){
+									translate([0,0,-7]) scale([1,1,.25]) sphere(r=40, $fn=100);
+									translate([0,0,(-10*twist_height_units)+5]) scale([1,1,.25]) sphere(r=40, $fn=100);
+									
+								}
+								translate([0,0,-22]) twist_large();
 							}
 						}
 							cylinder(h=100, d=3.25, center=true);
-							#translate([0,0,(-10*2)-3]) sphere(d=6, center=true);
+							translate([0,0,(-10*2)-3]) sphere(d=6, center=true);
 					}
-						#hull(){
-							translate([0,0,8])rotate_extrude(convexity = 10, $fn = 100) translate([40, 0, 0]) circle(r = 3, $fn = 100);
-							translate([0,0,-19]) rotate_extrude(convexity = 10, $fn = 100) translate([35.5, 0, 0]) circle(r = 3, $fn = 100);
-						}
-				}
 			}
             module middle_gear(){         
                                 gear(mm_per_tooth_gears,12,thickness_gears,hole_diameter_gears,twist_gears);
@@ -135,9 +138,10 @@ module motor_mount(){
                     }   
                 }
               module twist_large() {
+				  difference(){
                 difference() {
-                    linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 100) translate([2, 0, 0]){
-						circle(r = 37);
+                    linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2) translate([2, 0, 0]){
+						circle(r = radius);
 
 					}
 						union(){
@@ -145,6 +149,20 @@ module motor_mount(){
                             translate([0, 0, 0]) pins(height=20, d=3.5 );
                         }
                     }
+					cylinder(r=radius-2 ,h=10*3);
+					difference(){
+						rotate([0,-3.5,0]) translate([0,37,-2.5]) cube([100,37*2,10], center=true);
+						translate([35,2,2]) sphere(r=5);
+					}
+					difference(){
+						rotate([0,3.5,0]) translate([0,-37,22]) cube([100,37*2,10], center=true);
+						translate([35,-2,19]) sphere(r=5);
+					}
+					}
+					difference(){
+						cylinder(h=10*2, r=radius-2);
+						#rotate([180,0,0])translate([20,-4,-3]) linear_extrude(h=5) text("", font="fontawesome");
+					}
                 }
         //gear_large();
         //twist();

@@ -5,7 +5,7 @@ include <gears.scad>;
 
 gearOne = -16.5;
 gear_reverse = -10;
-gearLarge = -32.6+(gearOne/2);
+gearLarge = -32+(gearOne/2);
 
 module dont_render(){
 	module corner(){ 
@@ -72,13 +72,26 @@ module arm_movement(){
 }
 
 module xdf(){
-	module gear_arm(){
-					translate([0+(gearOne+(gearOne/2)),0+(gearOne+(gearOne/2))]) color([.5,.5,.5]) circle(d=3, $fn=20);
-					translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2))]) color([0,1,0]) circle(d=3, $fn=20);
+	difference(){
+		rotate([0,0,45]) square([215,215], center=true);
+		everything_dxf();
 	}
+	module everything_dxf(){
+		
+		
+	module gear_arm(){
+					translate([0+(gearOne+(gearOne/2)),0+(gearOne+(gearOne/2))]){
+						circle(d=3, $fn=20);
+					}
+					translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2))]){
+						circle(d=3, $fn=20);
+					}
+	}
+	
+	
 	module gear_arm_reversed(){
 					translate([0+(gear_reverse+(gearOne/2)),0+(gear_reverse+(gearOne/2))]) color([.5,.5,.5]) circle(d=3, $fn=20);
-		translate([0+(gear_reverse+(gearOne-gear_reverse)*2+(gearOne/2)),0+(gear_reverse+(gearOne-gear_reverse)*2+(gearOne/2))]) color([.5,.5,.5]) circle(d=3, $fn=20);
+		translate([0+(gear_reverse+(gearOne-gear_reverse)*2+(gearOne/2)),0+(gear_reverse+(gearOne-gear_reverse)*2+(gearOne/2))]) circle(d=3, $fn=20);
 					translate([0+(gearLarge+(gearLarge/2)),0+(gearLarge+(gearLarge/2))]) color([0,1,0]) circle(d=3, $fn=20);
 	}
 		circle(d=3, $fn=20);
@@ -106,24 +119,27 @@ module xdf(){
 			translate([0,-43.84/2]) circle(d=3, $fn=20);
 
 		}
-			
+		circle(d=25);
+		
 		rotate([0,0,-90]) gear_arm_reversed();
 		rotate([0,0,180]) gear_arm_reversed();
 		rotate([0,0,0]) gear_arm_reversed();
 		rotate([0,0,90]) gear_arm_reversed();
 	
-		rotate([0,0,45*0]) translate([155.56-5,0]) circle(d=3);
-		rotate([0,0,45*2]) translate([155.56-5,0]) circle(d=3);
-		rotate([0,0,45*4]) translate([155.56-5,0]) circle(d=3);
-		rotate([0,0,45*6]) translate([155.56-5,0]) circle(d=3);
+		rotate([0,0,45*0]) translate([152.03-4,0]) circle(d=3);
+		rotate([0,0,45*2]) translate([152.03-4,0]) circle(d=3);
+		rotate([0,0,45*4]) translate([152.03-4,0]) circle(d=3);
+		rotate([0,0,45*6]) translate([152.03-4,0]) circle(d=3);
 	
-		rotate([0,0,45]) translate([110,0]) square([1,220], center=true);
-		rotate([0,0,45*3]) translate([110,0]) square([1,220], center=true);
-		rotate([0,0,45*5]) translate([110,0]) square([1,220], center=true);
-		rotate([0,0,45*7]) translate([110,0]) square([1,220], center=true);
-		
+		//rotate([0,0,45]) translate([110,0]) square([1,220], center=true);
+		//rotate([0,0,45*3]) translate([110,0]) square([1,220], center=true);
+		//rotate([0,0,45*5]) translate([110,0]) square([1,220], center=true);
+		//rotate([0,0,45*7]) translate([110,0]) square([1,220], center=true);
+	}
 }
-xdf();
+
+translate([215/2,215/2,0]) rotate([0,0,45]) xdf();
+
 
 //arm_movement();
 
