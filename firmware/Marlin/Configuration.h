@@ -476,9 +476,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // default settings
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {63, 63, (74.3333*5)*8, 73.33}  // steps per unit with aluminum gears and a wades geared extruder
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {63, 63, (74.3333*5)*1.925, 180}  // dollo with direct drive
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {63, 63, (74.3333*5)*1.925, 150}  // dollo with direct drive
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {50, 50, 50, 7.95774754364*18}  //direct driven humming bird 
-#define DEFAULT_MAX_FEEDRATE          {500, 500, 1, 25}    // (mm/sec)
+#define DEFAULT_MAX_FEEDRATE          {500, 500, 1, 120}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,200,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
