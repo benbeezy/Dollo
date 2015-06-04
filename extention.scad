@@ -1,10 +1,10 @@
 include <include.scad>;
 include <globals.scad>;
 metal_rod_size = 9;
-
+support = false;
 //min number of units is 2
 //max is however large your printer can print
-units = 3;
+units = 4;
 
 module extention(){
 	
@@ -56,12 +56,14 @@ module extention(){
 	}
 
 //support
+if (support==true)
+{
+	translate([0,0,5/2]) cylinder(h=5, d=6, center=true);
+	translate([30,0,5/2]) cylinder(h=5, d=6, center=true);
+	translate([0,units*30,5/2]) cylinder(h=5, d=6, center=true);
+	translate([30,units*30,5/2]) cylinder(h=5, d=6, center=true);
+}
 
-translate([0,0,5/2]) cylinder(h=5, d=6, center=true);
-translate([30,0,5/2]) cylinder(h=5, d=6, center=true);
-	
-translate([0,units*30,5/2]) cylinder(h=5, d=6, center=true);
-translate([30,units*30,5/2]) cylinder(h=5, d=6, center=true);
 
 difference(){
 	extention();
