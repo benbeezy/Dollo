@@ -1,20 +1,21 @@
 include <include.scad>;
 include <globals.scad>;
 
+
 //globals
 
 obj_height = 40;
 units = 2;
 tail_depth = 8;
 tie_scale_x = 1;
-tie_scale_y = 1.1;
-tie_scale_z = 1.2;
+tie_scale_y = 1;
+tie_scale_z = 1;
 
 //herring bone style rack made from inkscape and OpenScad
 				module tie_taken(){
 					difference(){
 						union(){
-							translate([0,tail_depth,.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
+							#translate([0,tail_depth,.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  #male_dovetail(height=30);
 							translate([0,tail_depth,-30.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
 						}
 						cube([10,20,1], center=true);

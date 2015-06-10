@@ -7,10 +7,11 @@ include <include.scad>;
 
 frame_width = 35.5;
 tail_depth = 11;
-mount_max = 50+6.25+6.25;
+mount_max = 62.5;
 wabble = 1.5;
 not_tooth_gap = 0;
 rack_gap = 3;
+tower_height = 17.5+3;
 
 //$fn=220;
 
@@ -40,42 +41,39 @@ module y_mount_added(){
     
 	translate([0,frame_width-15.5+rack_gap,2.5]) rounded_cube(height = 5, width = 50, depth = 11, diameter = 3.5);
 //towers
-	translate([0-21,-25.75,0]) cube([42,18,15+2.5+3.5]);
-	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,17.5+3.5);
-	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,17.5+3.5);
+	translate([0-21,-25.75,0]) cube([42,18,tower_height]);
+	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,tower_height);
+	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,tower_height);
 
 	//#translate([17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
 	//#translate([-17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
 }
 
 module y_mount_taken(){
+	rotate([0,0,45]) {
+		translate([5.65-21,5.65-21,-10]) cylinder(d=3.5, h=70);
+		translate([5.65+31-21,5.65-21,-10]) cylinder(d=3.5, h=70);
+		translate([5.65-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
+		translate([5.65+31-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
+
+		//counter sink
+		#translate([5.65-21,5.65-21,-2]) sphere(d=6.5);
+		#translate([5.65+31-21,5.65-21,-2]) sphere(d=6.5);
+		#translate([5.65-21,5.65+31-21,-2]) sphere(d=6.5);
+		#translate([5.65+31-21,5.65+31-21,3]) cylinder(d=6, h=20);
 
 
-rotate([0,0,45]) {
-	translate([5.65-21,5.65-21,-10]) cylinder(d=3.5, h=70);
-	translate([5.65+31-21,5.65-21,-10]) cylinder(d=3.5, h=70);
-	translate([5.65-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
-	translate([5.65+31-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
+		translate([-70,-30,-5]) cube([50,50,50]);
+		translate([-30,-70,-5]) cube([50,50,50]);
 
-//counter sink
-	#translate([5.65-21,5.65-21,-2]) sphere(d=6.5);
-	#translate([5.65+31-21,5.65-21,-2]) sphere(d=6.5);
-	#translate([5.65-21,5.65+31-21,-2]) sphere(d=6.5);
-	#translate([5.65+31-21,5.65+31-21,3]) cylinder(d=6, h=20);
+		translate([0,0,-5]) cylinder(d=23, h=20);
 
+		#rotate([90,0,-45]) translate([-8,-3,-55+tail_depth]) male_dovetail(height=30);
+		#rotate([90,0,-45]) translate([8,-3,-55+tail_depth]) male_dovetail(height=30);
 
-	translate([-70,-30,-5]) cube([50,50,50]);
-	translate([-30,-70,-5]) cube([50,50,50]);
-
-	translate([0,0,-5]) cylinder(d=23, h=20);
-
-	#rotate([90,0,-45]) translate([-8,-3,-55+tail_depth]) male_dovetail(height=30);
-	#rotate([90,0,-45]) translate([8,-3,-55+tail_depth]) male_dovetail(height=30);
-
-	#rotate([90,0,-45]) translate([-8,-3,22-tail_depth]) male_dovetail(height=30);
-	#rotate([90,0,-45]) translate([8,-3,22-tail_depth]) male_dovetail(height=30);
-}
-
+		#rotate([90,0,-45]) translate([-8,-3,22-tail_depth]) male_dovetail(height=30);
+		#rotate([90,0,-45]) translate([8,-3,22-tail_depth]) male_dovetail(height=30);
+	}
 }
 
 module motor_mount(){
