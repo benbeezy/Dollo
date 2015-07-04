@@ -10,7 +10,7 @@ tail_depth = 11;
 mount_max = 62.5;
 wabble = 1.5;
 not_tooth_gap = 0;
-rack_gap = 3;
+rack_gap = 2.5;
 tower_height = 17.5+3;
 
 //$fn=220;

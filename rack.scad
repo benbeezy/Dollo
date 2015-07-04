@@ -5,7 +5,7 @@ include <globals.scad>;
 //globals
 
 obj_height = 40;
-units = 8; //only even numbers
+units = 10; //only even numbers
 tail_depth = 8;
 tie_scale_x = 1;
 tie_scale_y = 1;
@@ -65,7 +65,7 @@ module rackFull(){
 		}
 	}
 }
-		for(rack_length=[-5:5]){ 
+		for(rack_length=[-units:5]){ 
 				translate([rack_length*20,0,0]) rackFull();
 		}
 		for(rack_length=[-units:1]){ 
