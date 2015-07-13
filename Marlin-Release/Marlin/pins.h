@@ -542,7 +542,7 @@
 
 
 // uncomment one of the following lines for RAMPS v1.3 or v1.0, comment both for v1.2 or 1.1
-// #define RAMPS_V_1_3
+#define RAMPS_V_1_3
 // #define RAMPS_V_1_0
 
 
@@ -557,17 +557,29 @@
     #define X_MIN_PIN           3
     #define X_MAX_PIN           -1   //2 //Max endstops default to disabled "-1", set to commented value to enable.
 
-    #define Y_STEP_PIN         60
-    #define Y_DIR_PIN          61
-    #define Y_ENABLE_PIN       56
-    #define Y_MIN_PIN          14
-    #define Y_MAX_PIN          -1   //15
+    #define Y_STEP_PIN         46
+    #define Y_DIR_PIN          48
+    #define Y_ENABLE_PIN       63
+    #define Y_MIN_PIN          18
+    #define Y_MAX_PIN          -1
 
-    #define Z_STEP_PIN         46
-    #define Z_DIR_PIN          48
-    #define Z_ENABLE_PIN       63
-    #define Z_MIN_PIN          18
-    #define Z_MAX_PIN          -1
+    #define Z_STEP_PIN         60
+    #define Z_DIR_PIN          61
+    #define Z_ENABLE_PIN       56
+    #define Z_MIN_PIN          14
+    #define Z_MAX_PIN          -1   //15
+    
+    //old #define Y_STEP_PIN         60
+    //old #define Y_DIR_PIN          61
+    //old #define Y_ENABLE_PIN       56
+    //old #define Y_MIN_PIN          14
+    //old #define Y_MAX_PIN          -1   //15
+
+    //old #define Z_STEP_PIN         46
+    //old #define Z_DIR_PIN          48
+    //old #define Z_ENABLE_PIN       63
+    //old #define Z_MIN_PIN          18
+    //old #define Z_MAX_PIN          -1
 
     #define Y2_STEP_PIN        36
     #define Y2_DIR_PIN         34
@@ -599,17 +611,29 @@
     #define X_MIN_PIN           3
     #define X_MAX_PIN           2
 
-    #define Y_STEP_PIN         60
-    #define Y_DIR_PIN          61
-    #define Y_ENABLE_PIN       56
-    #define Y_MIN_PIN          14
-    #define Y_MAX_PIN          15
+    #define Y_STEP_PIN         46
+    #define Y_DIR_PIN          48
+    #define Y_ENABLE_PIN       62
+    #define Y_MIN_PIN          18
+    #define Y_MAX_PIN          19
 
-    #define Z_STEP_PIN         46
-    #define Z_DIR_PIN          48
-    #define Z_ENABLE_PIN       62
-    #define Z_MIN_PIN          18
-    #define Z_MAX_PIN          19
+    #define Z_STEP_PIN         60
+    #define Z_DIR_PIN          61
+    #define Z_ENABLE_PIN       56
+    #define Z_MIN_PIN          14
+    #define Z_MAX_PIN          15
+    
+    //old #define Y_STEP_PIN         60
+    //old #define Y_DIR_PIN          61
+    //old #define Y_ENABLE_PIN       56
+    //old #define Y_MIN_PIN          14
+    //old #define Y_MAX_PIN          15
+
+    //old #define Z_STEP_PIN         46
+    //old #define Z_DIR_PIN          48
+    //old #define Z_ENABLE_PIN       62
+    //old #define Z_MIN_PIN          18
+    //old #define Z_MAX_PIN          19
 
     #define Y2_STEP_PIN        36
     #define Y2_DIR_PIN         34
@@ -859,17 +883,29 @@
 #define X_MIN_PIN           3
 #define X_MAX_PIN          -1    //2
 
-#define Y_STEP_PIN         38
-#define Y_DIR_PIN          40
-#define Y_ENABLE_PIN       36
-#define Y_MIN_PIN          16
+#define Y_STEP_PIN         44
+#define Y_DIR_PIN          46
+#define Y_ENABLE_PIN       42
+#define Y_MIN_PIN          18
 #define Y_MAX_PIN          -1    //17
 
-#define Z_STEP_PIN         44
-#define Z_DIR_PIN          46
-#define Z_ENABLE_PIN       42
-#define Z_MIN_PIN          18
+#define Z_STEP_PIN         38
+#define Z_DIR_PIN          40
+#define Z_ENABLE_PIN       36
+#define Z_MIN_PIN          16
 #define Z_MAX_PIN          -1    //19
+
+//old #define Y_STEP_PIN         38
+//old #define Y_DIR_PIN          40
+//old #define Y_ENABLE_PIN       36
+//old #define Y_MIN_PIN          16
+//old #define Y_MAX_PIN          -1    //17
+
+//old #define Z_STEP_PIN         44
+//old #define Z_DIR_PIN          46
+//old #define Z_ENABLE_PIN       42
+//old #define Z_MIN_PIN          18
+//old #define Z_MAX_PIN          -1    //19
 
 #define E0_STEP_PIN         32
 #define E0_DIR_PIN          34
