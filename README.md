@@ -1,5 +1,5 @@
 # Dollo
-a fully printed 3D printer
+a fully printed 3D printer, that scales.
 
 # Goals in order of priority
 
@@ -13,7 +13,7 @@ a fully printed 3D printer
 
 5) Make it as low cost as possible.
 
-6) use parts that are each to find.
+6) use parts that are easy to find.
 
 7) make it durrable (since it can print its own parts this isnt super high priority)
 
@@ -21,60 +21,65 @@ a fully printed 3D printer
 
 # Part count and list for small Dollo
 
-9 x rack.scad
+(x=number of slots times 2) -- rack_x_units.stl
 
-13 x extention.scad
+13 -- extention.stl
 
-8 x corner.scad
+8 -- corner.stl
 
-156 x bow_tie.scad but extra never hurts
+156 -- bow_tie.stl but extra never hurts
 
-2 x x_spacer.scad
+2 -- x_spacer.stl
 
-6 x motor_mount.scad
+6 -- motor_mount.stl
 
-6 x twist_corner.scad
+8 -- twist_corner.stl
 
-2 x large_gear from gears.scad
+4 -- large_gear.stl
 
-2 x middle_gear from gears.scad
+3 -- gear.stl
 
-1 x gear_one from gears.scad
+4 -- middle_gear.stl
 
-1 x hot_end_mount
+1 -- gear_one.stl
 
-3 x gear.scad
+1 -- hot_end_mount.stl
 
 Metal parts we hope to get rid of in the future
 
-11 x M3x40  for the motor mounts and bed gears
+11 -- M3x40  for the motor mounts and bed gears
 
-5 x M3x10  for the motor mounts and bed gears
+5 -- M3x10  for the motor mounts and bed gears
 
-4 x M3x20  for the z motor
+4 -- M3x20  for the z motor
 
-4 x M3 lock nuts  for the bed gears
+4 -- M3 lock nuts  for the bed gears
 
 Electronics and other
 
-1 x main controller board (we use RAMBo and also like the idea of printing the pcb and solding the componants your self)
+1 - main controller board (we use RAMBo and also like the idea of printing the pcb and solding the componants your self)
 
-3 x end stop switches   we are trying to come up with a clever way of doing with with printed conductive parts
+3 - end stop switches   we are trying to come up with a clever way of doing with with printed conductive parts
 
-5 x motors
+5 - motors
 
-1 x hotend or whatever tool tip you want really
+1 - hotend or whatever tool tip you want really
 
-1 x hobbed thing, gear or bolt
+1 - hobbed thing, gear or bolt
 
-1 x bearing for extruder (might be able to print)
+1 - bearing for extruder (might be able to print)
 
-1 x heated bed
+1 - heated bed
 
-1 x glass/aluminum that fits on the bed
+1 - glass/aluminum that fits on the bed
 
-4 x springs and screw for leveling your bed.
+4 - springs and screw for leveling your bed.
 
+Optiions for a loarger printer
+
+8 - extention_3_units.stl  This will make it so your printer can fit a normal heated bed in the normal way and not limit the space at all
+
+4 - extention_x_units & more twist_corner.stl. You can add as many of whatever size you want piecse into the z axis, this print doesnt been anything exta for those to work
 
 # How to assemble
 1) start with the basic frame, take a single corner and butt joint all 3 extention pieces to it with all 4 bow_tie slots. then on the end of each of those add corner pieces then extention pieces agian untill you have built out a full cube shape.
@@ -100,11 +105,11 @@ Electronics and other
 
 # Extra cool facts
 
-1) I can up with the origional version of this when I was 16 and in high school and it was done in blender becuase that all I knew how to use
+1) I came up with the origional version of this when I was 16 and in high school and it was done in blender becuase thats all I knew how to use
 
 2) This printer as it stands is under 1KG of printed parts 
 
-3) We printed the first Dollo on 3 Prusa Mendal printer that were printer on other printers them selves and so on, all the way back to the start, so these machine have no only open-source in their genealogy
+3) We printed the first Dollo on 3 Prusa Mendal printer that were printer on other printers them selves and so on, all the way back to the start, so these machine have only open-source in their genealogy
 
 4) I lived 300 miles from the printer that I used and did all of the printing over the internet using octopi to print the first Dollo
 
