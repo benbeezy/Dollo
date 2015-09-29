@@ -13,6 +13,9 @@ not_tooth_gap = 0;
 rack_gap = 2.5;
 tower_height = 17.5+3;
 
+head_diamiter = 7.5;
+extra_depth =1.5;
+
 //$fn=220;
 
 diameter = 3.5;
@@ -57,10 +60,14 @@ module y_mount_taken(){
 		translate([5.65+31-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
 
 		//counter sink
-		#translate([5.65-21,5.65-21,-2]) sphere(d=6.5);
-		#translate([5.65+31-21,5.65-21,-2]) sphere(d=6.5);
-		#translate([5.65-21,5.65+31-21,-2]) sphere(d=6.5);
-		#translate([5.65+31-21,5.65+31-21,3]) cylinder(d=6, h=20);
+		translate([5.65-21,5.65-21,-2+extra_depth]) sphere(d=head_diamiter);
+		translate([5.65+31-21,5.65-21,-2+extra_depth]) sphere(d=head_diamiter);
+		translate([5.65-21,5.65+31-21,-2+extra_depth]) sphere(d=head_diamiter);
+		translate([5.65+31-21,5.65+31-21,3]) cylinder(d=head_diamiter, h=20);
+
+		translate([5.65-21,5.65-21,-2-extra_depth]) cylinder(d=head_diamiter, h=extra_depth*2);
+		translate([5.65+31-21,5.65-21,-2-extra_depth]) cylinder(d=head_diamiter, h=extra_depth*2);
+		translate([5.65-21,5.65+31-21,-2-extra_depth]) cylinder(d=head_diamiter, h=extra_depth*2);
 
 
 		translate([-70,-30,-5]) cube([50,50,50]);
