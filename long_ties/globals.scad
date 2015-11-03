@@ -36,7 +36,7 @@ metal_core_rode = 5;
 ///////////////// X THINGS /////////////////////
 
 //male dove tails
-max_width=10;
+max_width=8;
 min_width=5;
 depth=5;
 height=obj_leg/2;

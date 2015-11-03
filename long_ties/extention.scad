@@ -13,7 +13,6 @@ module extention(){
 	}
 
 	module subtracted(){
-		
 	translate([15,0,15]) rotate([0,45,0]) tie_end();
 	translate([15,units*30,15]) rotate([0,45,0]) rotate([0,0,180]) tie_end();
 	translate([15,15,15]) rotate([90,0,0]) cylinder(h=5000, d= metal_rod_size, center=true);
@@ -35,13 +34,6 @@ module extention(){
 	}	
 } //module extention
 
-	module holes(){
-		//rotate([0,90,0]) translate([-15,7,0]) cylinder(h=40, d=6, $fn=20);
-		//rotate([0,90,0]) translate([-15,0+(units*30)-7,0]) cylinder(h=40, d=6, $fn=20);
-		//translate([15,7,0]) cylinder(h=40, d=6, $fn=20);
-		//translate([15,0+(units*30)-7,0]) cylinder(h=40, d=6, $fn=20);
-	}
-
 //support
 if (support==true)
 {
@@ -51,8 +43,8 @@ if (support==true)
 	translate([30,-30,5/2]) cylinder(h=5, d=6, center=true);
 }
 
-
-difference(){
-	rotate([90,0,0]) extention();
-	holes();
+module extention_finished(){
+		rotate([90,0,0]) extention();
 }
+
+extention_finished();

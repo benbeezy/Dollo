@@ -22,7 +22,8 @@ module y_mount_taken(){
 }
 difference(){
 	translate([0,-thickness/2-12.5,15]) bow_support();
-	#translate([0,-thickness/2-12.5,25]) cube([50,10,20], center=true);
+	translate([0,-thickness/2-12.5,25]) cube([50,10,20], center=true);
+	translate([0,-thickness/2-12.5,0]) cube([29,10,20], center=true);
 }
 
 difference(){

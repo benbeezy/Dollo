@@ -1,6 +1,6 @@
 include <include.scad>;
 include <globals.scad>;
-
+    support = false;
 	slot_translate = .5;
 	rod_size = .5;
 module basic_corner(){
@@ -40,9 +40,6 @@ module basic_corner(){
 };
 module full_corner(){
 	module support_pillers(){
-		translate([40,0,0]) cylinder(h=2.5,d=4);
-		translate([37,4,0]) cylinder(h=5,d=4);
-		translate([37,-4,0]) cylinder(h=5,d=4);
 		
 		translate([48-slot_translate/2,3,0]) cylinder(h=11,d=4);
 		translate([48-slot_translate/2,-3,0]) cylinder(h=11,d=4);
@@ -50,9 +47,12 @@ module full_corner(){
 		translate([39-slot_translate/2,18,24]) rotate([0,-40,0]) cylinder(h=6,d=4);
 		translate([39-slot_translate/2,-18,24]) rotate([0,-40,0]) cylinder(h=6,d=4);
 	}
-support_pillers();
-rotate([0,0,(360/3)*2]) support_pillers();
-rotate([0,0,(360/3)*1]) support_pillers();
+	if (support==true)
+	{
+		support_pillers();
+		rotate([0,0,(360/3)*2]) support_pillers();
+		rotate([0,0,(360/3)*1]) support_pillers();
+	}
 	difference(){
 		translate([0,0,0]) rotate([0,-35,0])basic_corner();
 		union(){
