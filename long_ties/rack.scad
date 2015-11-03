@@ -11,6 +11,7 @@ tie_scale_x = 1;
 tie_scale_y = 1;
 tie_scale_z = 1;
 
+resolution = 10;
 
 //good things
 module rounded_cube(width,depth,height){
@@ -28,11 +29,7 @@ module rounded_cube(width,depth,height){
 }  
 				module tie_taken(){
 					difference(){
-						union(){
-							translate([0,tail_depth,.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
-							translate([0,tail_depth,-30.5]) rotate([0,0,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
-						}
-						cube([10,20,1], center=true);
+							#translate([0,tail_depth,0]) rotate([0,90,180]) scale([tie_scale_x,tie_scale_z,tie_scale_y])  male_dovetail(height=30);
 					}
 				}
 
@@ -81,13 +78,13 @@ diamiter = 4;
 intersection(){
 //translate([0,0,-10]) cube([20,20,20]);
 	intersection(){
-					rotate([-90,0,0]) translate([-10-((units-2)*15),0,0]) translate([30,0,0]) rounded_cube(30*units+10,20,40,$fn=50);
+					rotate([-90,0,0]) translate([-10-((units-2)*15),0,0]) translate([30,0,0]) rounded_cube(30*units+10,20,40,$fn=resolution);
 	union(){ 
 		rotate([-90,0,0]) intersection(){
 			difference(){
 				rackObject();
 				for(rack_length=[-units:1]){ 
-						translate([30*rack_length+9,2,0]) tie_taken();
+						translate([30*rack_length+30,2,0]) tie_taken();
 				}
 			}
 

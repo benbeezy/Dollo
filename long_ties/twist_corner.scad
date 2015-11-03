@@ -21,6 +21,8 @@ double = false; //this will make the piece twist in both directions. only works 
 gearOne = -16.5;
 gear_reverse = -10;
 gearLarge = -32.6+(gearOne/2);
+
+resolution = 60;
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 
 
@@ -43,16 +45,12 @@ gearLarge = -32.6+(gearOne/2);
 
 
 	module wrap(){
-				translate([-16.5,30+4,-30]) rotate([0,0,-90]) mirror([0,0,1]) male_dovetail();
-				translate([-30,30+4,-16.5]) rotate([-90,180,-90]) mirror([0,0,1]) male_dovetail();
+				#translate([-16.5,30+4,-30]) rotate([0,90,-90]) male_dovetail();
+				#translate([-30,30+4,-16.5]) rotate([-90,180,0])  male_dovetail();
 		
 				rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=9);
 				mirror([1,0,-1]) rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=9);
 
-	}	
-	module wrap_add(){
-				translate([-15,33.5+4,-15]) rotate([0,0,-90]) mirror([0,0,1]) cube([7,32,.5]);
-				translate([-15,33.5+4,-15]) rotate([-90,0,-90]) mirror([0,0,1]) cube([7,32,.5]);
 	}
 
 module arm_movement(){
@@ -65,14 +63,12 @@ module arm_movement(){
 	//twist
 	
 	for (extrude=[0:units+1]){
-		translate([0+(gearLarge+(gearLarge/2))+tooth_depth,0+(gearLarge+(gearLarge/2))+tooth_depth,extrude*20]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) twist_large($fn=60);
+		translate([0+(gearLarge+(gearLarge/2))+tooth_depth,0+(gearLarge+(gearLarge/2))+tooth_depth,extrude*20]) color([0,1,0]) rotate([0,0,(360/22)*1.75]) twist_large($fn=resolution);
 		translate([21.5-95,21.5-95,extrude*30-45-5]) rotate([90,0,90]) wrap();
 	}
 	
 	}
-	for (support = [1:units]){
-		translate([-105,-74.5,support*30-45-5]) rotate([90,0,180])  wrap_add();
-	}
+
 }
 
 module finished(){
