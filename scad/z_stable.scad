@@ -8,7 +8,7 @@ module bearing(){
 
 
 module z_stable(){
-	translate([extra,extra,0]) cube([23+(extra*2),23+(extra*2),7], center=true);
+	translate([extra,extra,0]) cube([24+(extra*2),24+(extra*2),7], center=true);
 }
 
 difference(){
