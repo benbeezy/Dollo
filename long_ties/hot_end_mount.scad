@@ -28,16 +28,19 @@ module y_mount_taken(){
 		translate([0,-2,hotend_depth-natch_height+3]) rotate([0,-90,0]) cylinder(h=30, d=3.5, $fn=20);
 }
 module mount(){
-    rotate([0,-90,0]){
-        intersection(){
-                    translate([-15,-30,0]) cube([15,100,100]);
-            difference(){
-                    y_mount_added();
-                    y_mount_taken();
-            }
-        }
-                translate([-11.5,.7,37.5+(hotend_depth-80)]) cube([7,.3,42.5]);
-    }
+	difference(){
+		rotate([0,-90,0]){
+			intersection(){
+						translate([-15,-30,0]) cube([15,100,100]);
+				difference(){
+						y_mount_added();
+						y_mount_taken();
+				}
+			}
+					translate([-11.5,.7,37.5+(hotend_depth-80)]) cube([7,.3,42.5]);
+		}
+		translate([-hotend_depth/2,0,(-hotend_depth/2)-22.75/2]) cube([hotend_depth,hotend_depth,hotend_depth], center=true);
+	}
 }
 
 mount();
