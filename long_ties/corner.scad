@@ -1,5 +1,6 @@
 include <include.scad>;
 include <globals.scad>;
+//if you can do pretty far over hangs, like an SLA printer or something then take this off by setting it to flase.
     support = false;
 	slot_translate = .5;
 	rod_size = .5;

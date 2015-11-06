@@ -1,6 +1,6 @@
 smoothing = 100;
 length = 13;
-tilt_level = 1;
+tilt_level = 1.1;
 scaling_x = .9;
 scaling_y = 1;
 scaling_z = 1;
@@ -15,6 +15,7 @@ module bow_tie_master(){
 			intersection(){
 				rotate([0,-45,0]) cube([obj_leg,obj_leg,obj_leg]);
 				translate([-obj_leg/2,(obj_leg/2)-tilt_level,-5]) rotate([45,0,0]) cube([obj_leg,obj_leg,obj_leg*2]);
+				#translate([0,length/4,length*.5]) rotate([45,0,0]) sphere(d=length*tilt_level);
 			}
 			male_dovetail(height=length);
 		}
@@ -23,6 +24,7 @@ module bow_tie_master(){
 			intersection(){
 				rotate([0,-45,0]) cube([obj_leg,obj_leg,obj_leg]);
 				translate([-obj_leg/2,(obj_leg/2)-tilt_level,-5]) rotate([45,0,0]) cube([obj_leg,obj_leg,obj_leg*2]);
+				#translate([0,length/4,length*.5]) rotate([45,0,0]) sphere(d=length*tilt_level);
 			}
 			male_dovetail(height=length);
 		}
