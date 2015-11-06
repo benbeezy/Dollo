@@ -45,9 +45,9 @@ module rackObject() {
 module rackHalf(){
 	intersection() {
 		union() {
-			rotate(a=[0,0,0]) {
+			rotate(a=[0,-25,0]) {
 				linear_extrude(height = obj_height*5, center = true, convexity = 10)
-			   	import (file = "../vectors/rack.dxf", layer = "Layer_1");
+			   	import (file = "rack.dxf", layer = "Layer_1");
 			}
 		}
 			translate([0, 0, obj_height/4*-1]) cube(center = true, [31, 50, obj_height/2]);
@@ -66,7 +66,7 @@ module rackFull(){
 	}
 }
 		for(rack_length=[-units:5]){ 
-				translate([rack_length*18,0,0]) rackFull();
+				translate([rack_length*20,0,0]) rackFull();
 		}
 		for(rack_length=[-units:1]){ 
 			difference(){
@@ -91,8 +91,17 @@ intersection(){
 				}
 			}
 
+			difference(){
+				union(){
 					translate([30,0,0]) rounded_cube(30*units,20,40,$fn=50);
-
+					translate([-12.5-((units-2)*15),-5,0]) rotate([0,25,0]) cube([30,30,30]);
+					mirror([0,0,1]) translate([-12.5-((units-2)*15),-5,0]) rotate([0,25,0]) cube([30,30,30]);
+				}
+				union(){
+					translate([47.5,-5,0]) rotate([0,25,0]) cube([units*30,30,units*30]);
+					mirror([0,0,1]) translate([47.5,-5,0]) rotate([0,25,0]) cube([units*30,30,units*30]);
+				}
+			}
 	//intersection
 	}
 	//union
