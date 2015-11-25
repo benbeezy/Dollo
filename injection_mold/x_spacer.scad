@@ -23,10 +23,7 @@ module y_mount_taken(){
 
 	cube([head_width,head_width,51*2], center=true);
 }
-difference(){
-	translate([0,-thickness/2-12.5,15]) bow_support();
-	#translate([0,-thickness/2-12.5,25]) cube([50,10,20], center=true);
-}
+
 
 difference(){
 	y_mount_added();
