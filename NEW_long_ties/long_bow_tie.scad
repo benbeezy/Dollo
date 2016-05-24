@@ -17,6 +17,6 @@ module bow_tie_master(){
 }
 
 intersection(){
-scale([scaling_x,scaling_y,scaling_z])	rotate([90,0,0]) bow_tie_master();
-rotate([90,0,0]) cylinder(r=5.7, h=200);
+    scale([scaling_x,scaling_y,scaling_z])	rotate([90,0,0]) bow_tie_master();
+    rotate([90,0,0]) cylinder(r=5.7, h=200);
 }
