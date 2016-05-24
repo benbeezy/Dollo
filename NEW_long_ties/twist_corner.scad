@@ -2,14 +2,6 @@ include <include.scad>;
 include <globals.scad>;
 include <gears.scad>;
 
-
-
-
-
-
-
-
-
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 tooth_depth = (sqrt(18)/2)+2;
 twisted_depth = 2;
@@ -25,33 +17,14 @@ gearLarge = -32.6+(gearOne/2);
 resolution = 60;
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 
+module wrap(){
+            translate([-16.55,30+4,-32]) rotate([0,90,-90]) male_dovetail();
+            translate([-32,30+4,-16.55]) rotate([-90,180,0])  male_dovetail();
+    
+            rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=8);
+            mirror([1,0,-1]) rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=8);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	module wrap(){
-				#translate([-16.5,30+4,-30]) rotate([0,90,-90]) male_dovetail();
-				#translate([-30,30+4,-16.5]) rotate([-90,180,0])  male_dovetail();
-		
-				rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=9);
-				mirror([1,0,-1]) rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=9);
-
-	}
+}
 
 module arm_movement(){
 	difference(){
@@ -86,7 +59,7 @@ module finished(){
 module base(){
 	intersection(){
 		translate([0,0,0]) rotate([0,0,45]) finished();
-		translate([-50,-50,0]) cube([100,100,units*40]);
+		//translate([-50,-50,0]) cube([100,100,units*40]);
 	}
 }
 
@@ -103,8 +76,8 @@ difference(){
 }
 	translate([-2,0,0]) difference(){
 	union(){
-		translate([10,14,30*units+.8]) rotate([90,0,0]) male_dovetail(height=20);	
-		translate([-10,14,30*units+.8]) rotate([90,0,0]) male_dovetail(height=20);	
+		translate([10,14,30*units+1.3]) rotate([90,0,0]) male_dovetail(height=20);	
+		translate([-10,14,30*units+1.3]) rotate([90,0,0]) male_dovetail(height=20);	
 	}
 		translate([0,-33,0]) rotate([0,0,45]) cube([30,30,units*45]);
 	}
