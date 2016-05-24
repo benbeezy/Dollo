@@ -1,21 +1,6 @@
 include <publicDomainGearV1.1.scad>;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 pillar_space = 180;
 twist_gears = 0;
@@ -30,34 +15,6 @@ mm_per_tooth_gears    = 9;
 pressure_angle_gears  = 28;
 twist_height_units = 3;
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module frame(){
@@ -88,7 +45,7 @@ module motor_mount(){
     module gear_one(hole_diameter_gears=5.5){
         translate([0,0,thickness_gears]) mirror([0,0,1]) gear(mm_per_tooth_gears,12,thickness_gears,hole_diameter_gears,twist_gears);
         gear(mm_per_tooth_gears,12,thickness_gears,hole_diameter_gears,twist_gears);
-        translate([0,4.5,0]) cube([5,5,thickness_gears], center=true);
+        translate([0,4.5,thickness_gears/2]) cube([5,5,thickness_gears*2], center=true);
         }
 		
 		
@@ -161,7 +118,7 @@ module motor_mount(){
 					}
 					difference(){
 						cylinder(h=10*2, r=radius-2);
-						#rotate([180,0,0])translate([20,-4,-3]) linear_extrude(h=5) text("", font="fontawesome");
+						rotate([180,0,0])translate([20,-4,-3]) linear_extrude(h=5) text("", font="fontawesome");
 					}
                 }
         //gear_large();
