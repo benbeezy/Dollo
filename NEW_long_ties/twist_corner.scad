@@ -65,12 +65,16 @@ module base(){
 module top_dove() {
     intersection() {
         rotate ([90,0,0]) intersection() {
-            male_dovetail(height=20);
+            intersection() {
+                male_dovetail(height=20);
+                translate([-6,0,0]) cube([10,4.8,25]);
+            }
             cylinder(r=5.7, h=20);
         }
-        translate([-5,-7,0]) rotate([0,90,0]) cylinder(r=8, h=20);
+        translate([-5,-7.5,0]) rotate([0,90,0]) cylinder(r=8, h=20);
     }
 }
+//translate([50,50,0]) top_dove(); //testing
 
 module with_dove(){
     difference(){
