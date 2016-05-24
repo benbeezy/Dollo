@@ -89,14 +89,12 @@
 
 
 //////////////////      SOME RACK AND Z THINGS       //////////////////
-module rack() {
-		include <rack.scad>;
+
+module z_holes() {
+    rotate([0,-90,0]) for(z=[0:z_hole_number])
+    translate([22.5+z*15,16,-12])
+        hole();
 }
-	module z_holes() {
-		rotate([0,-90,0]) for(z=[0:z_hole_number])
-		translate([22.5+z*15,16,-12])
-			hole();
-	}
 
 module pin_cuts() {
 	union(){
