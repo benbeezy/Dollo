@@ -174,6 +174,7 @@ module bow_support(){
 }
 
 	module wrap(units){
+translate([-15,15,0]) rotate([90,0,0]){
 	for (y = [-1:units-2]) // two iterations, z = -1, z = 1
 	{
 			translate([15, (y*30)+15, 15]){
@@ -183,4 +184,5 @@ module bow_support(){
 			}
 		}
 	}
+}
 	}
