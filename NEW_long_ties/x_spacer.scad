@@ -3,7 +3,7 @@ include <include.scad>;
 
 tail_depth = 55;
 tail_depth_2 = -10;
-thickness = 24;
+thickness = 22;
 module y_mount_added(){
 	translate([0,-15+6-3.5,51/2]) cube([30,thickness,51], center=true);
     
