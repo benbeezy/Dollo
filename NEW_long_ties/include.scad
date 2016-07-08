@@ -171,10 +171,14 @@ module bow_support(){
 	}
 }
 
-	module wrap(){
-		depth = 30;
-				translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,90,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,180,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
-				rotate([0,-90,0]) translate([-15,30,15]) rotate([90,180,90]) male_dovetail(height=depth);
+	module wrap(units){
+	for (y = [-1:units-2]) // two iterations, z = -1, z = 1
+	{
+			translate([15, (y*30)+15, 15]){
+			for (r = [0:4]) // two iterations, z = -1, z = 1
+			{
+				rotate([0,r*90,0]) translate([0,15,15]) rotate([-90,0,0])male_dovetail(height=30);
+			}
+		}
+	}
 	}
