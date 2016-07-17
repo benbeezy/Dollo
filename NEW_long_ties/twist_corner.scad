@@ -64,7 +64,7 @@ module base(){
 
 module top_dove() {
     intersection() {
-        scale([0.9, 1, 1]) rotate ([90,0,0]) intersection() {
+        scale([0.9, 1, 0.9]) rotate ([90,0,0]) intersection() {
             intersection() {
                 male_dovetail(height=20);
                 translate([-6,0,0]) cube([10,4.6,25]);
@@ -83,8 +83,8 @@ module with_dove(){
             translate([-50,-50,1.38]) cube([100,100,units*30]);
         }
         translate([0,0,1]) union(){
-            translate([10,14,0]) rotate([90,0,0]) male_dovetail(height=25);
-            translate([-10,14,0]) rotate([90,0,0]) male_dovetail(height=25);
+            translate([10,14.5,0]) rotate([90,0,0]) male_dovetail(height=25);
+            translate([-10,14.5,0]) rotate([90,0,0]) male_dovetail(height=25);
         }
     }
 
