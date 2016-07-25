@@ -32,7 +32,7 @@ module master(){
         }
 
         module bolt_hole() {
-            translate([0, 0, obj_height/2-10]) rotate([0,90,0]) cylinder(d=2.5, h=10);
+            translate([0, 0, obj_height/2-13]) rotate([0,90,0]) cylinder(d=2.5, h=10);
         }
 
         module bone() {
