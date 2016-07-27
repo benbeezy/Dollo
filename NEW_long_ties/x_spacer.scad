@@ -23,7 +23,7 @@ translate([-15,-45,0]) wrap(3);
 rotate([90,0,0]) difference(){
 	translate([0,-thickness/2-12.5,15]) bow_support();
 	translate([0,-thickness/2-12.5,25]) cube([50,10,20], center=true);
-	translate([0,-thickness/2-12.5,0]) cube([29,10,20], center=true);
+	translate([0,-thickness/2-12.5,0]) cube([31,10,20], center=true);
 }
 
 rotate([90,0,0]) difference(){
