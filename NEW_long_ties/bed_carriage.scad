@@ -210,6 +210,7 @@ module corner_arm(){
                 translate([43.84/2, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
                 translate([43.84/2, 0]) cylinder(d=5.6, h=2.4, $fn=20);
                 translate([148, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
+                translate([148, 0, height-2.4]) nut();
             }
         }
 
