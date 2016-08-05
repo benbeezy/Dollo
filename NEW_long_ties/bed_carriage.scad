@@ -41,6 +41,7 @@ echo (gear_large_hole_offset);
 center_width = 80;
 
 bolt_hole_dia = 3.2;
+bolt_head_hole_dia = 5.8;
 
 height = 12;
 arm_width = 11;
@@ -60,8 +61,8 @@ module nut() {
 
 module elongated_nut() {
     hull() {
-        translate([-1,0,0]) nut();
-        translate([1,0,0]) nut();
+        translate([-2,0,0]) nut();
+        translate([2,0,0]) nut();
     }
 }
 
@@ -74,8 +75,8 @@ module elongated_nut() {
 module gear_middle_hole(dia=3, height=height) {
     translate([gear_middle_hole_offset,0,0]) {
         hull() {
-            translate([-1,0,0]) cylinder(d=dia, h=height);
-            translate([1,0,0]) cylinder(d=dia, h=height);
+            translate([-2,0,0]) cylinder(d=dia, h=height);
+            translate([2,0,0]) cylinder(d=dia, h=height);
         }
     }
 }
@@ -87,8 +88,8 @@ module gear_middle_nut_hole(z=0) {
 module gear_large_hole(dia=3, height=height) {
     translate([gear_large_hole_offset,0,0]) {
         hull() {
-            translate([-1,0,0]) cylinder(d=dia, h=height);
-            translate([1,0,0]) cylinder(d=dia, h=height);
+            translate([-2,0,0]) cylinder(d=dia, h=height);
+            translate([2,0,0]) cylinder(d=dia, h=height);
         }
     }
 }
@@ -139,9 +140,9 @@ module arm_holes(){
 
 module center() {
 
-    $fn=20;
+    $fn=30;
     difference() {
-        cylinder(d=center_width, h=height, $fn=20);
+        cylinder(d=center_width, h=height, $fn=60);
         arm_holes();
         rotate([0,0,45]) motor();
         gear_middle_hole();
@@ -167,21 +168,21 @@ module center() {
 
 module arm() {
     offset_x = 15.1;
-    $fn=20;
+    $fn=30;
     union() {
         difference() {
-            translate([offset_x, -arm_width/2, 0]) cube([arm_length-offset_x, arm_width, height]);
-            translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.1,h=arm_hole_height);
+            translate([offset_x, -arm_width/2, 0]) cube([arm_length-offset_x-0.1, arm_width, height]);
+            translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.2,h=arm_hole_height, $fn=60);
             gear_arm_holes();
-            gear_middle_hole(dia=5.6, height=2.4);
-            gear_large_hole(dia=5.6, height=2.4);
+            gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
+            gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
             gear_large_nut_hole(z=height-2.4);
             translate([43.84/2,0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
-            translate([43.84/2,0]) cylinder(d=5.6, h=2.4, $fn=20);
+            translate([43.84/2,0]) cylinder(d=bolt_head_hole_dia, h=2.4, $fn=20);
         }
     
         difference() {
-            translate([arm_length, -arm_width]) cube([arm_width, 2*arm_width, arm_hole_height]);
+            translate([arm_length-0.1, -arm_width]) cube([arm_hole_width, 2*arm_width, arm_hole_height]);
             translate([arm_length+(arm_width/2), -arm_width/2]) cylinder(d=bolt_hole_dia, h=arm_hole_height);
             translate([arm_length+(arm_width/2), arm_width/2]) cylinder(d=bolt_hole_dia, h=arm_hole_height);
             translate([arm_length+(arm_width/2), -arm_width/2]) nut();
@@ -192,7 +193,7 @@ module arm() {
 
 module corner_arm(){
     offset_x = 15.1;
-    $fn=20;
+    $fn=30;
     
     corner_arm_offset = sqrt(arm_length*arm_length*2);
     edge_offset = sqrt((arm_width/2)*(arm_width/2)*2);
@@ -202,13 +203,13 @@ module corner_arm(){
 
             difference() {
                 translate([offset_x, -arm_width/2, 0]) cube([corner_arm_length-offset_x, arm_width, height]);
-                translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.1,h=arm_hole_height);
+                translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.2,h=arm_hole_height, $fn=60);
                 gear_arm_holes();
-                gear_middle_hole(dia=5.6, height=2.4);
-                gear_large_hole(dia=5.6, height=2.4);
+                gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
+                gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
                 gear_large_nut_hole(z=height-2.4);
                 translate([43.84/2, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
-                translate([43.84/2, 0]) cylinder(d=5.6, h=2.4, $fn=20);
+                translate([43.84/2, 0]) cylinder(d=bolt_head_hole_dia, h=2.4, $fn=20);
                 translate([148, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
                 translate([148, 0, height-2.4]) nut();
             }
@@ -216,7 +217,7 @@ module corner_arm(){
 
         difference() {
             translate([arm_length, arm_length-arm_width-extra_corner_offset, 0]) cube([arm_width, arm_width*2, arm_hole_height]);
-            translate([arm_length+arm_width/2, arm_length-arm_width/2-extra_corner_offset]) cylinder(d=3, h=height, $fn=20);
+            translate([arm_length+arm_width/2, arm_length-arm_width/2-extra_corner_offset]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
             translate([arm_length+arm_width/2, arm_length-arm_width/2-extra_corner_offset]) nut();
 
         }
@@ -234,11 +235,11 @@ module edge_arm() {
         translate([arm_length+arm_width,0,0]) rotate([0,0,90]) cube([arm_length+5, arm_width, height]);
         //arm();
         translate([arm_length, 0]) cube([arm_hole_width, arm_hole_width, arm_hole_height]);
-        translate([0,0.5,0]) corner_arm();
+        translate([0,-0.5,0]) corner_arm();
         translate([arm_length+arm_width/2, arm_length-arm_width/2-4]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
-        translate([arm_length+arm_width/2, arm_length-arm_width/2-4, height-2.4]) cylinder(d=5.6, h=3, $fn=20);
+        translate([arm_length+arm_width/2, arm_length-arm_width/2-4, height-2.4]) cylinder(d=bolt_head_hole_dia, h=3, $fn=20);
         translate([arm_length+(arm_width/2), arm_width/2]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
-        translate([arm_length+(arm_width/2), arm_width/2, height-2.4]) cylinder(d=5.6, h=height, $fn=20);
+        translate([arm_length+(arm_width/2), arm_width/2, height-2.4]) cylinder(d=bolt_head_hole_dia, h=height, $fn=20);
         translate([arm_length+arm_width/2, arm_length-arm_width/2-4]) cube([7,7,height], center=true);
     }
     
