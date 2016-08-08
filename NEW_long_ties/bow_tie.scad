@@ -41,6 +41,7 @@ module finished(){
 		difference(){
 			rotate([0,180,0]) bow_tie_master();
 			bow_holes();
+            translate([0,0,-25]) cylinder(d=2.5, h=50);
 		}
 	}
 }
