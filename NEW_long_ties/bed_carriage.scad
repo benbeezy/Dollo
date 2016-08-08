@@ -6,7 +6,7 @@ case_size=0; //small, i.e. one extention per side
 // gear math
 gearOne = 39.9;
 // print the rev_gear_two
-gearMiddle = case_size==0 ? 37.4 : gearOne;
+gearMiddle = case_size==0 ? 35.5 : gearOne;
 gearLarge = 68.4;
 tip_size = 5.5;
 gear_middle_hole_offset = gearOne/2 + gearMiddle/2 - tip_size;
@@ -38,7 +38,7 @@ echo("large");
 echo (gear_large_hole_offset);
 
 // piece dimensions
-center_width = 80;
+center_width = 77;
 
 bolt_hole_dia = 3.2;
 bolt_head_hole_dia = 5.8;
