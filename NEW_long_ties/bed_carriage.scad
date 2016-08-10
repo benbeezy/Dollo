@@ -52,6 +52,8 @@ arm_hole_height = height/2;
 
 extra_corner_offset = 4;
 
+motor_side_length = 43;
+
 module nut() {
     hull() {
         cylinder(d = 6.5, h=2.4, $fn=6);
@@ -103,7 +105,7 @@ module gear_arm_holes(){
 	gear_large_hole();
 }
 
-module motor(){
+module motor_holes(){
     cylinder(d=25, h=height);
     translate([43.84/2,0]) 		cylinder(d=bolt_hole_dia, h=height, $fn=20);
     translate([-43.84/2,0]) 	cylinder(d=bolt_hole_dia, h=height, $fn=20);
@@ -144,7 +146,7 @@ module center() {
     difference() {
         cylinder(d=center_width, h=height, $fn=60);
         arm_holes();
-        rotate([0,0,45]) motor();
+        rotate([0,0,45]) motor_holes();
         gear_middle_hole();
         rotate([0,0,45]) gear_middle_hole();
         rotate([0,0,90]) gear_middle_hole();
@@ -162,7 +164,7 @@ module center() {
         rotate([0,0,225]) gear_middle_nut_hole();
         rotate([0,0,270]) gear_middle_nut_hole();
         rotate([0,0,315]) gear_middle_nut_hole();
-        motor();
+        motor_holes();
     }
 }
 
@@ -188,7 +190,7 @@ module arm() {
             translate([arm_length+(arm_width/2), -arm_width/2]) nut();
             translate([arm_length+(arm_width/2), arm_width/2]) nut();
         }
-    }    
+    }
 }
 
 module corner_arm(){
@@ -245,12 +247,56 @@ module edge_arm() {
     
 }
 
+module center_motor() {
+    outer_length = motor_side_length + 2*arm_width;
+    $fn=30;
+    difference() {
+        translate([0, 0, height/4]) cube([outer_length, outer_length, height/2], center=true);
+        translate([0, 0, height/4]) cube([motor_side_length, motor_side_length, height/2], center=true);
+        
+        //holes
+        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
+        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
+        translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        
+        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
+        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
+        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        
+        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
+        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
+        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+
+        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
+        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
+        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+    }
+}
+
+module motor_arm() {
+    offset_x = motor_side_length/2;
+    outer_length = motor_side_length + 2*arm_width;
+    $fn=30;
+    difference() {
+        translate([offset_x, -arm_width/2, 0]) cube([arm_length-offset_x-0.1, arm_width, height/2]);
+        gear_large_hole(dia=bolt_hole_dia, height=height);
+        translate([0,0,height/2-0.4]) gear_large_hole(dia=bolt_head_hole_dia, height=2.5);
+        gear_large_nut_hole(z=0);
+        //gear_large_nut_hole(z=height-2.4);
+        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
+        translate([outer_length/2 - arm_width/2, 0, height/2-2.4]) nut();
+    }
+}
+
 module view_proper() {
     // attached
     translate([0,0,height]) rotate([180,0,0]) center();
     arm();
     corner_arm();
     edge_arm();
+    
+    translate([0,0,30]) center_motor();
+    translate([0,0,35]) motor_arm();
 }
 
 module view_parts() {
@@ -260,10 +306,15 @@ module view_parts() {
     // 4x corner_arm
     // 4x edge_arm
     // 4x edge_arm mirrored
+    
     center();
     translate([-50,-50]) arm();
     translate([-60,-70]) rotate([0,0,315]) corner_arm();
     translate([60,10, height]) rotate([0,180,90]) edge_arm();
+    translate([60,-205, height]) mirror([0,1,0]) rotate([0,180,90]) edge_arm();
+    translate([center_width,0,0]) center_motor();
+    translate([-40,-120,0]) motor_arm();
+    
 }
 
 //view_proper();
