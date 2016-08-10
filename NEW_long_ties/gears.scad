@@ -98,36 +98,39 @@ module twist() {
     }   
 }
 
+module twist_large_extrude() {
+    linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 60)
+        translate([tooth_depth_twist, 0, 0]){
+						circle(r = radius);
+            }
+}
+
 module twist_large() {
     difference(){
         difference() {
-            linear_extrude(height = 10*2, center = false, convexity = 10, twist = 360*2, $fn = 50)
-            translate([tooth_depth_twist, 0, 0]){
-						circle(r = radius);
-
-            }
-            union(){
-                translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
-                translate([0, 0, 0]) pins(height=20, d=3.5 );
-            }
+            twist_large_extrude();
+            //union(){
+            //    translate([0,0,3]) cylinder(d=3.5, h=50, center=true);
+            //    translate([0, 0, 0]) pins(height=20, d=3.5 );
+            //}
         }
         cylinder(r=radius-2, h=10*3);
-        difference(){
-            rotate([0,-3.5,0]) translate([0,37,-2.5]) cube([100,37*2,10], center=true);
-            translate([35,2,2]) sphere(r=5);
-        }
-        difference(){
-            rotate([0,3.5,0]) translate([0,-37,22]) cube([100,37*2,10], center=true);
-            translate([35,-2,19]) sphere(r=5);
-        }
+        //difference(){
+        //    rotate([0,-3.5,0]) translate([0,37,-2.5]) cube([100,37*2,10], center=true);
+        //    translate([35,2,2]) sphere(r=5);
+        //}
+        //difference(){
+        //    rotate([0,3.5,0]) translate([0,-37,22]) cube([100,37*2,10], center=true);
+        //    translate([35,-2,19]) sphere(r=5);
+        //}
     }
 	difference(){
 		cylinder(h=10*2, r=radius-2);
-		rotate([180,0,0])translate([20,-4,-3]) linear_extrude(h=5) text("", font="fontawesome");
+		//rotate([180,0,0])translate([20,-4,-3]) linear_extrude(h=5) text("", font="fontawesome");
 	}
 }
 
-//gear_large();
+gear_large();
 //twist();
 //reverse_gear_one();
 //reverse_gear_two();
