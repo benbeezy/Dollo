@@ -19,8 +19,8 @@ resolution = 60;
 
 // side rounded hollows and inside dovetail tracks
 module wrap(){
-    translate([-16.55,30+4,-32]) rotate([0,90,-90]) male_dovetail();
-    translate([-32,30+4,-16.55]) rotate([-90,180,0])  male_dovetail();
+    translate([-16.5,30+4,-32]) rotate([0,90,-90]) male_dovetail();
+    translate([-32,30+4,-16.5]) rotate([-90,180,0])  male_dovetail();
     
     rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=8);
     mirror([1,0,-1]) rotate([90,0,0]) translate([-35,-1,-25*units]) cylinder(h=35*units, r=8);
