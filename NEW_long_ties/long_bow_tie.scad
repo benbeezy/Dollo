@@ -1,6 +1,6 @@
 length = 50;
 tilt_level = 1.1;
-scaling_x = .9;
+scaling_x = .95;
 scaling_y = 1;
 scaling_z = 1;
 include <include.scad>;
