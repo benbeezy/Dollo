@@ -113,10 +113,10 @@ module motor_holes(){
     translate([0,-43.84/2]) 	cylinder(d=bolt_hole_dia, h=height, $fn=20);
     
     // nut indentations
-    translate([43.84/2,0]) 		cylinder(d=8, h=2, $fn=20);
-    translate([-43.84/2,0]) 	cylinder(d=8, h=2, $fn=20);
-    translate([0,43.84/2]) 		cylinder(d=8, h=2, $fn=20);
-    translate([0,-43.84/2]) 	cylinder(d=8, h=2, $fn=20);
+    translate([43.84/2,0]) 		cylinder(d=8, h=1, $fn=20);
+    translate([-43.84/2,0]) 	cylinder(d=8, h=1, $fn=20);
+    translate([0,43.84/2]) 		cylinder(d=8, h=1, $fn=20);
+    translate([0,-43.84/2]) 	cylinder(d=8, h=1, $fn=20);
     
 }
 
@@ -156,7 +156,7 @@ module center() {
         rotate([0,0,270]) gear_middle_hole();
         rotate([0,0,315]) gear_middle_hole();
         
-        gear_middle_nut_hole();
+        /*gear_middle_nut_hole();
         rotate([0,0,45]) gear_middle_nut_hole();
         rotate([0,0,90]) gear_middle_nut_hole();
         rotate([0,0,135]) gear_middle_nut_hole();
@@ -164,6 +164,7 @@ module center() {
         rotate([0,0,225]) gear_middle_nut_hole();
         rotate([0,0,270]) gear_middle_nut_hole();
         rotate([0,0,315]) gear_middle_nut_hole();
+        */
         motor_holes();
     }
 }
@@ -176,9 +177,9 @@ module arm() {
             translate([offset_x, -arm_width/2, 0]) cube([arm_length-offset_x-0.1, arm_width, height]);
             translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.2,h=arm_hole_height, $fn=60);
             gear_arm_holes();
-            gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
-            gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
-            gear_large_nut_hole(z=height-2.4);
+            //gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
+            //gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
+            //gear_large_nut_hole(z=height-2.4);
             translate([43.84/2,0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
             translate([43.84/2,0]) cylinder(d=bolt_head_hole_dia, h=2.4, $fn=20);
         }
@@ -207,9 +208,9 @@ module corner_arm(){
                 translate([offset_x, -arm_width/2, 0]) cube([corner_arm_length-offset_x, arm_width, height]);
                 translate([0, 0, arm_hole_height]) cylinder(d=center_width+0.2,h=arm_hole_height, $fn=60);
                 gear_arm_holes();
-                gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
-                gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
-                gear_large_nut_hole(z=height-2.4);
+                //gear_middle_hole(dia=bolt_head_hole_dia, height=2.4);
+                //gear_large_hole(dia=bolt_head_hole_dia, height=2.4);
+                //gear_large_nut_hole(z=height-2.4);
                 translate([43.84/2, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
                 translate([43.84/2, 0]) cylinder(d=bolt_head_hole_dia, h=2.4, $fn=20);
                 translate([148, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
@@ -288,6 +289,27 @@ module motor_arm() {
     }
 }
 
+module boltholder(h=10) {
+    difference() {
+        translate([0,1.4,0]) cube([arm_hole_width+4.2, height+0.6+6.8, h], center=true);
+        cube([arm_hole_width+0.2, height+0.6, h], center=true);
+        translate([0,10,h/2 - 5]) rotate([90,0,0]) cylinder(d=bolt_hole_dia, h=30, $fn=30);
+        translate([0, height/2+0.6+2+1.5, 0]) cube([5.65, 3, h], center=true);
+    }
+}
+
+module boltholder_center() {
+    difference() {
+        translate([0, 0, 12]) boltholder(h=16);
+        translate([0, 0, 12]) cube([arm_hole_width+6, height+0.6, 16], center=true);
+    }
+    difference() {
+        translate([0,1.4,0]) cube([arm_hole_width+4.2, height+0.6+6.8, 10], center=true);
+        cube([arm_hole_width+0.2, height+0.6, 10], center=true);
+    }
+}
+
+
 module view_proper() {
     // attached
     translate([0,0,height]) rotate([180,0,0]) center();
@@ -297,6 +319,8 @@ module view_proper() {
     
     translate([0,0,30]) center_motor();
     translate([0,0,35]) motor_arm();
+    translate([150, 50]) boltholder();
+    translate([150, 30]) boltholder_center();
 }
 
 module view_parts() {
@@ -314,6 +338,8 @@ module view_parts() {
     translate([60,-205, height]) mirror([0,1,0]) rotate([0,180,90]) edge_arm();
     translate([center_width,0,0]) center_motor();
     translate([-40,-120,0]) motor_arm();
+    translate([70, -100]) boltholder();
+    translate([90, -100]) boltholder_center();
     
 }
 
