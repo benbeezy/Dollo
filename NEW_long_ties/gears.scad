@@ -88,6 +88,12 @@ module reverse_gear_two(){
 	gear(mm_per_tooth_gears,10,thickness_gears*2,hole_diameter_gears,twist_gears);
 }
 
+module scaled_middle_gear(scaling=1){
+    hole_diameter = (1-scaling+1) * hole_diameter_gears;
+    echo (hole_diameter);
+	scale([scaling, scaling, 1]) gear(mm_per_tooth_gears, 10, thickness_gears*2, hole_diameter, twist_gears);
+}
+
 module twist() {
     difference() {
         translate([35,35,0]) linear_extrude(height = 10, center = false, convexity = 10, twist = 360, $fn = 50) translate([tooth_depth_twist, 0, 0]) circle(r = radius);
@@ -130,16 +136,20 @@ module twist_large() {
 	}
 }
 
-gear_large();
+//gear_large();
 //twist();
 //reverse_gear_one();
 //reverse_gear_two();
+//scaled_middle_gear(scaling=1.021);
 //twist_large();
 //middle_gear();
 //gear_one();
 
 // for finding out gear's diameter
-//cylinder(d=34.5, h=10);
+//difference() {
+//    translate([0,0,-20]) cylinder(d=77.7, h=20, $fn=120);
+//    translate([0,0,-20]) cylinder(d=3, h=30);
+//}
 
 
 
