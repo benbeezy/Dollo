@@ -249,43 +249,52 @@ module edge_arm() {
 }
 
 module center_motor() {
-    outer_length = motor_side_length + 2*arm_width;
+    outer_length = motor_side_length + 2*arm_width + 2;
     $fn=30;
     difference() {
-        translate([0, 0, height/4]) cube([outer_length, outer_length, height/2], center=true);
-        translate([0, 0, height/4]) cube([motor_side_length, motor_side_length, height/2], center=true);
+        union() {
+            translate([0, 0, height/4]) cube([outer_length, outer_length, height/2], center=true);
+            translate([outer_length/2, 0, height/4]) cube([10, 15, height/2], center=true);
+            rotate([0,0,90]) translate([outer_length/2, 0, height/4]) cube([10, 15, height/2], center=true);
+            rotate([0,0,180]) translate([outer_length/2, 0, height/4]) cube([10, 15, height/2], center=true);
+            rotate([0,0,270]) translate([outer_length/2, 0, height/4]) cube([10, 15, height/2], center=true);
+        }
+        translate([0, 0, height/4]) cube([motor_side_length+2, motor_side_length+2, height/2], center=true);
         
         //holes
-        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
-        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
-        translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width+10, arm_hole_width,5], center=true);
+        gear_middle_hole();
+        gear_middle_nut_hole();
         
-        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
-        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
-        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        rotate([0,0,90]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width+10, arm_hole_width,5], center=true);
+        rotate([0,0,90]) gear_middle_hole();
+        rotate([0,0,90]) gear_middle_nut_hole();
         
-        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
-        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
-        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        rotate([0,0,180]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width+10, arm_hole_width,5], center=true);
+        rotate([0,0,180]) gear_middle_hole();
+        rotate([0,0,180]) gear_middle_nut_hole();
 
-        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height/2);
-        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_head_hole_dia, h=2.4);
-        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width, arm_hole_width,5], center=true);
+        rotate([0,0,270]) translate([outer_length/2 - arm_width/2, 0, height/1.6]) cube([arm_hole_width+10, arm_hole_width,5], center=true);
+        rotate([0,0,270]) gear_middle_hole();
+        rotate([0,0,270]) gear_middle_nut_hole();
     }
 }
 
 module motor_arm() {
-    offset_x = motor_side_length/2;
-    outer_length = motor_side_length + 2*arm_width;
+    offset_x = motor_side_length/2 + 1;
+    outer_length = motor_side_length + 2*arm_width + 2;
     $fn=30;
     difference() {
         translate([offset_x, -arm_width/2, 0]) cube([arm_length-offset_x-0.1, arm_width, height/2]);
+        gear_middle_hole();
+        translate([0,0,height/2-0.4]) gear_middle_hole(dia=bolt_head_hole_dia, height=2.5);
+        
         gear_large_hole(dia=bolt_hole_dia, height=height);
         translate([0,0,height/2-0.4]) gear_large_hole(dia=bolt_head_hole_dia, height=2.5);
         gear_large_nut_hole(z=0);
         //gear_large_nut_hole(z=height-2.4);
-        translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
-        translate([outer_length/2 - arm_width/2, 0, height/2-2.4]) nut();
+        //translate([outer_length/2 - arm_width/2, 0, 0]) cylinder(d=bolt_hole_dia, h=height, $fn=20);
+        //translate([outer_length/2 - arm_width/2, 0, height/2-2.4]) nut();
     }
 }
 
@@ -336,7 +345,7 @@ module view_parts() {
     translate([-60,-70]) rotate([0,0,315]) corner_arm();
     translate([60,10, height]) rotate([0,180,90]) edge_arm();
     translate([60,-205, height]) mirror([0,1,0]) rotate([0,180,90]) edge_arm();
-    translate([center_width,0,0]) center_motor();
+    translate([center_width+5,0,0]) center_motor();
     translate([-40,-120,0]) motor_arm();
     translate([70, -100]) boltholder();
     translate([90, -100]) boltholder_center();
