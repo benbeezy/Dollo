@@ -1,6 +1,6 @@
 include <include.scad>;
 include <globals.scad>;
-include <gears.scad>;
+use <gears.scad>;
 
 ///////////////////// FOCUS ON THIS NOW //////////////////////////////
 tooth_depth = (sqrt(18)/2)+2;
