@@ -1,6 +1,6 @@
 length = 50;
 tilt_level = 1.1;
-scaling_x = .9;
+scaling_x = .95;
 scaling_y = 1;
 scaling_z = 1;
 include <include.scad>;
@@ -17,6 +17,6 @@ module bow_tie_master(){
 }
 
 intersection(){
-scale([scaling_x,scaling_y,scaling_z])	rotate([90,0,0]) bow_tie_master();
-rotate([90,0,0]) cylinder(r=5.7, h=200);
+    scale([scaling_x,scaling_y,scaling_z])	rotate([90,0,0]) bow_tie_master();
+    rotate([90,0,0]) cylinder(r=5.7, h=200);
 }

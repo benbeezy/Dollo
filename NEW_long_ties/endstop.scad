@@ -41,8 +41,8 @@ translate([-3,-2,8]) cube([4,9,1]);
 
 difference(){
 	difference(){
-		translate([-3,-2,-5]) cube([switch_length+6,switch_width+3,switch_depth+7]);
+		translate([-3,-2,-7]) cube([switch_length+6,switch_width+3,switch_depth+9]);
 		translate([0,0,2]) button_plus();
 	}
-	#rotate([90,0,0]) translate([switch_width,-5,-13]) male_dovetail(height=15);
+	#rotate([90,0,0]) translate([switch_width,-7,-13]) male_dovetail(height=15);
 }

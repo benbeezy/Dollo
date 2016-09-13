@@ -16,6 +16,8 @@ tower_height = 17.5+3;
 text = "Dollo";
 font = "Liberation Sans";
 
+hole_length = 0.8;
+
 //$fn=220;
 
 diameter = 3.5;
@@ -39,17 +41,30 @@ module rounded_cube(width,depth,height){
 module y_mount_added(){    
     
     translate([0,2.25-2.25+rack_gap/2,-1]) rounded_cube(depth = 50+rack_gap*2, width = frame_width+15+1, height=4, center=true);
-
-    
     
 	translate([0,frame_width-15.5+rack_gap,2.5]) rounded_cube(height = 5, width = 50, depth = 11, diameter = 3.5);
 //towers
-	translate([0-21,-25.75,0]) cube([42,18,tower_height]);
+    echo ((17.5+4.25)/2);
+	translate([0-21,-25.75,0.625]) cube([42,18,tower_height]);
 	translate([(32-21-4)+18/2,(11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(18,15,tower_height);
 	translate([(-21-4)+25/2,    (11-21+wabble)+15/2,(17.5+4.25)/2]) rounded_cube(25,15,tower_height);
 
 	//#translate([17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
 	//#translate([-17,(not_tooth_gap/2)+5,2.5]) rounded_cube(height = 4, width = 15, depth = not_tooth_gap, diameter = 2);
+}
+
+module bolt_hole() {
+    hull() {
+        cylinder(d=3.5, h=70);
+        translate([hole_length,hole_length,0]) cylinder(d=3.5, h=70);
+    }
+}
+
+module bolt_head_hole() {
+    hull() {
+        cylinder(d=6, h=3);
+        translate([hole_length,hole_length,0]) cylinder(d=6, h=3);
+    }
 }
 
 module y_mount_taken(){
@@ -73,22 +88,23 @@ module y_mount_taken(){
 		 }
 		 
 	rotate([0,0,45]) {
-		translate([5.65-21,5.65-21,-10]) cylinder(d=3.5, h=70);
-		translate([5.65+31-21,5.65-21,-10]) cylinder(d=3.5, h=70);
-		translate([5.65-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
-		translate([5.65+31-21,5.65+31-21,-10]) cylinder(d=3.5, h=70);
+        translate([5.65-21,5.65-21,-10]) bolt_hole();
+		translate([5.65+31-21,5.65-21,-10]) bolt_hole();
+		translate([5.65-21,5.65+31-21,-10]) bolt_hole();
+		translate([5.65+31-21,5.65+31-21,-10]) bolt_hole();
 
 		//counter sink
-		#translate([5.65-21,5.65-21,-2]) sphere(d=6.5);
-		#translate([5.65+31-21,5.65-21,-2]) sphere(d=6.5);
-		#translate([5.65-21,5.65+31-21,-2]) sphere(d=6.5);
-		#translate([5.65+31-21,5.65+31-21,3]) cylinder(d=6, h=20);
 
+        #translate([5.65-21,5.65-21,-3]) bolt_head_hole();
+		#translate([5.65+31-21,5.65-21,-3]) bolt_head_hole();
+		#translate([5.65-21,5.65+31-21,-3]) bolt_head_hole();
+		#translate([5.65+31-21,5.65+31-21,2.5]) bolt_head_hole();
 
 		translate([-70,-30,-5]) cube([50,50,50]);
 		translate([-30,-70,-5]) cube([50,50,50]);
 
 		translate([0,0,-5]) cylinder(d=23, h=20);
+        translate([hole_length,hole_length,-5]) cylinder(d=23, h=20);
 
 		#rotate([90,0,-45]) translate([-8,-3,-55+tail_depth]) male_dovetail(height=30);
 		#rotate([90,0,-45]) translate([8,-3,-55+tail_depth]) male_dovetail(height=30);
